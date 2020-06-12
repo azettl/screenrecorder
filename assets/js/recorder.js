@@ -1,9 +1,9 @@
 const videoElem = document.getElementById("video");
 const buttonElem = document.getElementById("button");
 var chunks = [];
-var recording = null;
-var recordingMP4 = false;
-var recordingWEBM = false;
+var running = false;
+var recordingMP4 = null;
+var recordingWEBM = null;
 // Options for getDisplayMedia()
 
 var displayMediaOptions = {
