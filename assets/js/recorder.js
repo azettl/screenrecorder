@@ -2,8 +2,8 @@ const videoElem = document.getElementById("video");
 const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
-var chunks = [];
-var recording = null;
+const chunks = [];
+const recording = null;
 // Options for getDisplayMedia()
 
 var displayMediaOptions = {
@@ -28,10 +28,14 @@ console.info = msg => logElem.innerHTML += `<span class="info">${msg}</span><br>
 async function startCapture() {
   logElem.innerHTML = "";
 
-  try {
-    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+  if (recording) {
+    window.URL.revokeObjectURL(recording);
+  }
 
-    mediaRecorder = new MediaRecorder(videoElem.srcObject, {mimeType: 'video/webm'});
+  try {
+    var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+
+    mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
     mediaRecorder.addEventListener('dataavailable', event => {
       if (event.data && event.data.size > 0) {
         chunks.push(event.data);
@@ -50,8 +54,9 @@ function stopCapture(evt) {
 
   tracks.forEach(track => track.stop());
 
-  recording = window.URL.createObjectURL(new Blob(this.chunks, {type: 'video/webm'}));
+  recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
 
+    document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
     document.getElementById("resultLink").href = recording;
 
   videoElem.srcObject = null;
