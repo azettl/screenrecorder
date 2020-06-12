@@ -72,6 +72,10 @@ function stopCapture(evt) {
   document.getElementById("resultLinkWEBM").href = recordingWEBM;
   document.getElementById("resultLinkWEBM").style.display = "inline-block";
 
+
+  var superBuffer = new Blob(chunks);
+  videoElem.src =
+    window.URL.createObjectURL(superBuffer);
 } 
 
 function dumpOptionsInfo() {
