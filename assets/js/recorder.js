@@ -16,10 +16,8 @@ var displayMediaOptions = {
 buttonElem.addEventListener("click", function(evt) {
     if(running){
         stopCapture();
-        buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
     }else{
         startCapture();
-        buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
     }
 }, false);
 
@@ -30,6 +28,7 @@ async function startCapture() {
   if (recording) {
     window.URL.revokeObjectURL(recording);
   }
+  buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
   document.getElementById("resultLink").style.display = "none";
 
   try {
@@ -59,6 +58,8 @@ function stopCapture(evt) {
   
   recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
   running = false;
+  
+  buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
     document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
     document.getElementById("resultLink").href = recording;
     document.getElementById("resultLink").style.display = "inline-block";

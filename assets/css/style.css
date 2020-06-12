@@ -38,3 +38,15 @@ color: darkgreen;
 #resultLink{
     display: none;
 }
+
+button, .button{
+    display: inline-block;
+    padding: .5rem 2rem;
+    background: #6ac2b6;
+    color: #333;
+    border: 2px solid;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 900;
+}
