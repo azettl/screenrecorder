@@ -24,6 +24,7 @@ stopElem.addEventListener("click", function(evt) {
 
 async function startCapture() {
 
+    videoElem.srcObject = null;
   if (recording) {
     window.URL.revokeObjectURL(recording);
   }
@@ -57,7 +58,6 @@ function stopCapture(evt) {
     document.getElementById("resultLink").href = recording;
     document.getElementById("resultLink").style.display = "inline-block";
 
-  videoElem.srcObject = null;
 } 
 
 function dumpOptionsInfo() {
