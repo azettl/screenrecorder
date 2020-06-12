@@ -39,6 +39,10 @@ color: darkgreen;
     display: none;
 }
 
+h1{
+    font-size: 4rem;
+}
+
 button, .button{
     display: inline-block;
     padding: .5rem 2rem;
