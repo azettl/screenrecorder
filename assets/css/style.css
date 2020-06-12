@@ -15,6 +15,7 @@ body{
 
 #video {
     border: 2px solid;
+    border-radius: .25rem;
 width: 98%;
 max-width: 860px;
 }
@@ -33,6 +34,7 @@ button, .button{
     background: #6ac2b6;
     color: #333;
     border: 2px solid;
+    border-radius: .25rem;
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
