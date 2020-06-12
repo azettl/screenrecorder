@@ -9,7 +9,7 @@ var displayMediaOptions = {
   video: {
     cursor: "always"
   },
-  audio: false
+  audio: true
 };
 
 // Set event listeners for the start and stop buttons
