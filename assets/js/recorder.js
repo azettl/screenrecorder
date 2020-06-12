@@ -1,5 +1,4 @@
 const videoElem = document.getElementById("video");
-const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
 var chunks = [];
@@ -24,7 +23,6 @@ stopElem.addEventListener("click", function(evt) {
 
 
 async function startCapture() {
-  logElem.innerHTML = "";
 
   if (recording) {
     window.URL.revokeObjectURL(recording);
