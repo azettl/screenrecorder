@@ -11,6 +11,7 @@ body{
     max-width: 720px;
     background: antiquewhite;
     margin: 0 auto;
+    height: calc(100vh - 4rem);
 }
 
 #video {
