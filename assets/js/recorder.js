@@ -56,7 +56,7 @@ function stopCapture(evt) {
 
   tracks.forEach(track => track.stop());
   
-  recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
+  recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
   running = false;
   buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
     document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
