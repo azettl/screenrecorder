@@ -20,10 +20,8 @@ startElem.addEventListener("click", function(evt) {
 
 stopElem.addEventListener("click", function(evt) {
   stopCapture();
-}, false); console.log = msg => logElem.innerHTML += `${msg}<br>`;
-console.error = msg => logElem.innerHTML += `<span class="error">${msg}</span><br>`;
-console.warn = msg => logElem.innerHTML += `<span class="warn">${msg}<span><br>`;
-console.info = msg => logElem.innerHTML += `<span class="info">${msg}</span><br>`; 
+}, false); 
+
 
 async function startCapture() {
   logElem.innerHTML = "";
@@ -31,6 +29,7 @@ async function startCapture() {
   if (recording) {
     window.URL.revokeObjectURL(recording);
   }
+  document.getElementById("resultLink").style.display = "none";
 
   try {
     var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
@@ -58,6 +57,7 @@ function stopCapture(evt) {
 
     document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
     document.getElementById("resultLink").href = recording;
+    document.getElementById("resultLink").style.display = "inline-block";
 
   videoElem.srcObject = null;
 } 

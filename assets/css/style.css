@@ -1,5 +1,7 @@
-body{
-    background:antiquewhite;
+body{    
+    max-width: 720px;
+    background: antiquewhite;
+    margin: 0 auto;
 }
 
 #video {
@@ -18,4 +20,8 @@ color: orange;
 
 .info {
 color: darkgreen;
+}
+
+#resultLink{
+    display: none;
 }
