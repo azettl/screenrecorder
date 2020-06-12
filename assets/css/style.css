@@ -21,7 +21,8 @@ width: 98%;
 max-width: 860px;
 }
 
-#resultLink{
+#resultLinkMP4,
+#resultLinkWEBM{
     display: none;
 }
 

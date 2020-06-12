@@ -2,7 +2,8 @@ const videoElem = document.getElementById("video");
 const buttonElem = document.getElementById("button");
 var chunks = [];
 var recording = null;
-var running = false;
+var recordingMP4 = false;
+var recordingWEBM = false;
 // Options for getDisplayMedia()
 
 var displayMediaOptions = {
@@ -25,11 +26,15 @@ buttonElem.addEventListener("click", function(evt) {
 async function startCapture() {
 
     videoElem.srcObject = null;
-  if (recording) {
-    window.URL.revokeObjectURL(recording);
-  }
+    if (recordingMP4) {
+      window.URL.revokeObjectURL(recordingMP4);
+    }
+    if (recordingWEBM) {
+      window.URL.revokeObjectURL(recordingWEBM);
+    }
   buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
-  document.getElementById("resultLink").style.display = "none";
+  document.getElementById("resultLinkMP4").style.display = "none";
+  document.getElementById("resultLinkWEBM").style.display = "none";
 
   try {
     var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
@@ -56,12 +61,16 @@ function stopCapture(evt) {
 
   tracks.forEach(track => track.stop());
   
-  recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
+  recordingMP4 = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
+  recordingWEBM = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
   running = false;
   buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
-    document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
-    document.getElementById("resultLink").href = recording;
-    document.getElementById("resultLink").style.display = "inline-block";
+  document.getElementById("resultLinkMP4").addEventListener('progress', e => console.log(e));
+  document.getElementById("resultLinkMP4").href = recordingMP4;
+  document.getElementById("resultLinkMP4").style.display = "inline-block";
+  document.getElementById("resultLinkWEBM").addEventListener('progress', e => console.log(e));
+  document.getElementById("resultLinkWEBM").href = recordingWEBM;
+  document.getElementById("resultLinkWEBM").style.display = "inline-block";
 
 } 
 
