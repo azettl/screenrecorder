@@ -2,8 +2,8 @@ const videoElem = document.getElementById("video");
 const logElem = document.getElementById("log");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
-const chunks = [];
-const recording = null;
+var chunks = [];
+var recording = null;
 // Options for getDisplayMedia()
 
 var displayMediaOptions = {
