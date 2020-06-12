@@ -1,8 +1,8 @@
 const videoElem = document.getElementById("video");
-const startElem = document.getElementById("start");
-const stopElem = document.getElementById("stop");
+const buttonElem = document.getElementById("button");
 var chunks = [];
 var recording = null;
+var running = false;
 // Options for getDisplayMedia()
 
 var displayMediaOptions = {
@@ -13,13 +13,15 @@ var displayMediaOptions = {
 };
 
 // Set event listeners for the start and stop buttons
-startElem.addEventListener("click", function(evt) {
-  startCapture();
+buttonElem.addEventListener("click", function(evt) {
+    if(running){
+        stopCapture();
+        buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
+    }else{
+        startCapture();
+        buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
+    }
 }, false);
-
-stopElem.addEventListener("click", function(evt) {
-  stopCapture();
-}, false); 
 
 
 async function startCapture() {
@@ -32,6 +34,9 @@ async function startCapture() {
 
   try {
     var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    currentVideo.addEventListener('inactive', e => {
+      stopCapture(e);
+    });
 
     mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
     mediaRecorder.addEventListener('dataavailable', event => {
@@ -40,7 +45,7 @@ async function startCapture() {
       }
     });
     mediaRecorder.start(10);
-
+    running = true;
     dumpOptionsInfo();
   } catch(err) {
     console.error("Error: " + err);
@@ -53,7 +58,7 @@ function stopCapture(evt) {
   tracks.forEach(track => track.stop());
   
   recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
-
+  running = false;
     document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
     document.getElementById("resultLink").href = recording;
     document.getElementById("resultLink").style.display = "inline-block";
