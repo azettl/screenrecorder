@@ -72,7 +72,7 @@ function stopCapture(evt) {
   document.getElementById("resultLinkWEBM").href = recordingWEBM;
   document.getElementById("resultLinkWEBM").style.display = "inline-block";
 
-
+  videoElem.srcObject = null;
   videoElem.src = recordingWEBM;
   //videoElem.play();
 } 
