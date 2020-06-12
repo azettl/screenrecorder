@@ -52,7 +52,7 @@ function stopCapture(evt) {
 
   tracks.forEach(track => track.stop());
 
-  recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
+  videoElem.srcObject = recording = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
 
     document.getElementById("resultLink").addEventListener('progress', e => console.log(e));
     document.getElementById("resultLink").href = recording;
