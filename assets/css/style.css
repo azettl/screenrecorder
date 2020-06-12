@@ -3,10 +3,6 @@ body{
     height:100%;margin:0;padding:0
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body{
     font-size:16px;
 	line-height:1.62857143;
@@ -18,21 +14,9 @@ body{
 }
 
 #video {
-border: 1px solid #999;
+    border: 2px solid;
 width: 98%;
 max-width: 860px;
-}
-
-.error {
-color: red;
-}
-
-.warn {
-color: orange;
-}
-
-.info {
-color: darkgreen;
 }
 
 #resultLink{
@@ -58,3 +42,20 @@ button, .button{
 	font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
    
 }
+
+/* Scrollbar Start */
+*::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+  }
+  
+  *::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #6ac2b6;
+    outline: 2px solid #333;
+    cursor: pointer;
+  }
+  /* Scrollbar End */
