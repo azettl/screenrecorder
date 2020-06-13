@@ -2,6 +2,7 @@ const videoElem = document.getElementById("video");
 const buttonElem = document.getElementById("button");
 var chunks = [];
 var running = false;
+var chunkRecordings = [];
 var recordingMP4 = null;
 var recordingWEBM = null;
 // Options for getDisplayMedia()
@@ -42,12 +43,22 @@ async function startCapture() {
       stopCapture(e);
     });
 
-    mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
+    const mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
     mediaRecorder.addEventListener('dataavailable', event => {
       if (event.data && event.data.size > 0) {
         chunks.push(event.data);
       }
     });
+
+    var singleChunks = [];
+    setInterval(()=>{
+        const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
+        mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
+        mediaRecorderCunk.onstop = e => chunkRecordings.push(new Blob(singleChunks));
+        mediaRecorderCunk.start();
+        setTimeout(()=>mediaRecorderCunk.stop(), 1000);
+    }, 1000);
+
     mediaRecorder.start(10);
     running = true;
     dumpOptionsInfo();
@@ -60,13 +71,13 @@ function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
   let videoChunks = document.getElementById("videoChunks");
   tracks.forEach(track => track.stop());
-  chunks.forEach(
-      function(chunk){
-        console.log(chunk);
+  chunkRecordings.forEach(
+      function(chunkRecording){
+        console.log(chunkRecording);
         var videoChunkElem = document.createElement("video");
         videoChunkElem.setAttribute("controls", "true");
 
-        var videoChunkBlob = window.URL.createObjectURL(chunk);
+        var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecording, {type: 'video/webm'}));
         videoChunkElem.src = videoChunkBlob;
 
         videoChunks.appendChild(videoChunkElem);
