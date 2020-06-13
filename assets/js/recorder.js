@@ -153,7 +153,9 @@
                     aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                     setTimeout(
                         function(){
-                            aMediaRecordersChunks[iMediaRecordersChunkC].stop()
+                            if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
+                                aMediaRecordersChunks[iMediaRecordersChunkC].stop();
+                            }
                         }, 
                         iSingleChunkLengthInMS
                     );
@@ -196,7 +198,9 @@
                         aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                         setTimeout(
                             function(){
-                                aMediaRecordersChunks[iMediaRecordersChunkC].stop()
+                                if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
+                                    aMediaRecordersChunks[iMediaRecordersChunkC].stop();
+                                }
                             }, 
                             iSingleChunkLengthInMS
                         );
