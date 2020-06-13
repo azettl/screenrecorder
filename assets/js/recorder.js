@@ -17,6 +17,7 @@
 
     var oSingleChunkInterval   = null;
     var oFullObjectURL         = null;
+    var currentVideo           = null; 
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
@@ -36,7 +37,7 @@
         "click", 
         (event) => {
             if(isRecordingRunning){
-                videoElem.dispatchEvent(new Event("inactive"));
+                currentVideo.dispatchEvent(new Event("inactive"));
             }else{
                 startCapture();
             }
@@ -68,7 +69,7 @@
             // Get the Current Screen and assign it to the Video Elements Source Object 
             // and the currentVideo Constant. Stop the Recording when the User Stops Sharing his Screen
             // via the "inactive" Event.
-                const currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
+                currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
                     {
                         video: {
                             cursor: "always"
