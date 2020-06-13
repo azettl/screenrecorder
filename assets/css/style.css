@@ -3,134 +3,146 @@
     --text-color:#333;
 }
 
-html,
-body{
-    height:100%;
-    margin:0;
-    padding:0
-}
+/* START:: General */
+    html,
+    body{
+        height:100%;
+        margin:0;
+        padding:0
+    }
 
-body{
-    font-size:16px;
-	font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-    max-width: 720px;
-    background: antiquewhite;
-    margin: 0 auto;
-    height: calc(100vh - 4rem);
-}
+    body{
+        font-size:16px;
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+        max-width: 720px;
+        background: antiquewhite;
+        margin: 0 auto;
+        height: calc(100vh - 4rem);
+    }
 
-video {
-    border: 2px solid;
-    border-radius: .25rem;
-    width: calc(100% - 4px);
-    max-width: 720px;
-}
+    h1{
+        font-size: 4rem;
+        word-break: break-all;
+    }
 
-.chunk{
-    display: inline-block;
-    margin:0 2rem 2rem 0;
-    width:14rem;
-}
+    footer{
+        margin:2rem 0;
+    }
 
-.chunk video{
-    width:calc(100% - 4px);
-    min-width: 160px;
-    display: block;
-}
-
-.chunk .button{
-    width:calc(100% - 4px - 4rem);
-    margin-top:1rem;
-}
-
-#videoChunks{
-    display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-#videoChunksHeading{
-    margin-top:4rem;
-}
-
-#videoChunksHeading,
-#resultLinkWEBM{
-    display: none;
-}
-
-h1{
-    font-size: 4rem;
-    word-break: break-all;
-}
-
-.buttons{
-    display: grid;
-    grid-gap: 1rem;
-}
-
-button, .button{
-    display: inline-block;
-    padding: .5rem 2rem;
-    background: var(--button-color);
-    color: var(--text-color);
-    border: 2px solid;
-    border-radius: .25rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    text-align: center;
-    font-weight: 900;
-    font-size:16px;
-    cursor: pointer;
-	font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-   
-}
-
-/* Scrollbar Start */
-::-webkit-scrollbar {
-    height: 1rem;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--button-color);
-    border-radius: .25rem;
-    border: 2px solid var(--text-color);
-}
-::-webkit-scrollbar-track {
-    background-color: transparent;
-    border: 2px solid var(--text-color);
-    border-radius: .25rem;
-}
-  /* Scrollbar End */
-
-footer{
-    margin:2rem 0;
-}
-
-#loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 1;
-    width: 6rem;
-    height: 6rem;
-    margin: -3rem 0 0 -3rem;
-    border: 16px solid var(--text-color);
-    border-radius: 50%;
-    border-top: 16px solid var(--button-color);
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-  }
-  
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  header, article, footer {
+    header, article, footer {
     padding: 0 2rem;
-}
+    }
+/* END:: General */
+
+/* START:: Video Elements */
+    video {
+        border: 2px solid;
+        border-radius: .25rem;
+        width: calc(100% - 4px);
+        max-width: 720px;
+    }
+/* END:: Video Elements */
+
+/* START:: Chunks */
+    #videoChunks{
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #videoChunksHeading{
+        margin-top:4rem;
+    }
+
+    #videoChunksHeading,
+    #resultLinkWEBM{
+        display: none;
+    }
+/* END:: Chunks */
+
+/* START:: Single Chunk */
+    .chunk{
+        display: inline-block;
+        margin:0 2rem 2rem 0;
+        width:14rem;
+    }
+
+    .chunk video{
+        width:calc(100% - 4px);
+        min-width: 160px;
+        display: block;
+    }
+
+    .chunk .button{
+        width:calc(100% - 4px - 4rem);
+        margin-top:1rem;
+    }
+/* END:: Single Chunk */
+
+/* START:: Buttons */
+    .buttons{
+        display: grid;
+        grid-gap: 1rem;
+    }
+
+    button, .button{
+        display: inline-block;
+        padding: .5rem 2rem;
+        background: var(--button-color);
+        color: var(--text-color);
+        border: 2px solid;
+        border-radius: .25rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 900;
+        font-size:16px;
+        cursor: pointer;
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    }
+/* END:: Buttons */
+
+/* START:: Scrollbar */
+    ::-webkit-scrollbar {
+        height: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--button-color);
+        border-radius: .25rem;
+        border: 2px solid var(--text-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+        border: 2px solid var(--text-color);
+        border-radius: .25rem;
+    }
+/* END:: Scrollbar */
+
+/* START:: Loading Spinner and Loading Animation */
+    #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 6rem;
+        height: 6rem;
+        margin: -3rem 0 0 -3rem;
+        border: 16px solid var(--text-color);
+        border-radius: 50%;
+        border-top: 16px solid var(--button-color);
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+/* END:: Loading Spinner and Loading Animation */

@@ -2,6 +2,6 @@
 layout: page
 title:  Screenrecorder
 permalink: /
-description: A online Screenrecorder
+description: A Online Screenrecorder which gives you one second chunks of the recording.
 ---
 
