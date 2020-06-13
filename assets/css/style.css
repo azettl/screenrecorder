@@ -26,7 +26,7 @@ video.chunk{
     border-radius: .25rem;
     width:160px;
     display: inline-block;
-    margin-right:2rem;
+    margin:2rem 2rem 2rem 0;
 }
 
 #videoChunks{
