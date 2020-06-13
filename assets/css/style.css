@@ -65,7 +65,8 @@
     }
 
     #videoChunksHeading,
-    #resultLinkWEBM{
+    #resultLinkWEBM,
+    #resultLinkGIF{
         display: none;
     }
 /* END:: Chunks */

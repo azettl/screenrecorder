@@ -60,6 +60,7 @@
         // Change Button Text to "Stop Capture" and Hide the Download Button + One Second Chunks Section
             buttonElem.innerHTML      = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
             webmDowElem.style.display = "none";
+            gifDowElem.style.display = "none";
             chunksHElem.style.display = "none";
 
         // Try to Record the Screen
@@ -295,6 +296,7 @@
         // and Display the Download Link and Chunks Section.
             webmDowElem.href          = oFullObjectURL;
             webmDowElem.style.display = "inline-block";
+            gifDowElem.style.display  = "inline-block";
             chunksHElem.style.display = "inline-block";
 
         // Remove the Old Source Object from the Video Element and Assign the new Object URL
