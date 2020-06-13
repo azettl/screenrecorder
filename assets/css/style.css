@@ -147,6 +147,11 @@
 /* END:: Loading Spinner and Loading Animation */
 
 /* START:: Range Input */
+label{
+    font-weight: 900;
+    margin-top: 1rem;
+}
+
 input[type="range"]{
     -webkit-appearance: none;
     border-radius: .25rem;
@@ -192,5 +197,13 @@ datalist{
     height: auto;
     overflow: hidden;
     margin-top: -1rem;
+    margin-bottom:1rem;
+}
+
+datalist > option {
+    width: 4ex;
+    display: flex;
+    justify-content: center;
+    align-items: end;
 }
 /* END:: Range Input */
