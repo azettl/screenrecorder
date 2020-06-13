@@ -341,7 +341,7 @@
                 videoChunkAGIFElem.classList.add("button");
                 videoChunkAGIFElem.classList.add("downloadgif");
                 videoChunkAGIFElem.dataset.videoelement = "video" + iChunkCount;
-                videoChunkAGIFElem.setAttribute("onclick", "downloadGIF(this.dataset.videoelement)");
+                videoChunkAGIFElem.setAttribute("onclick", "downloadGIF(this.dataset.videoelement, 'screenrecording-chunk-" + iChunkCount + ".gif')");
                 videoChunkDivElem.appendChild(videoChunkAGIFElem);
 
                 chunksElem.appendChild(videoChunkDivElem);

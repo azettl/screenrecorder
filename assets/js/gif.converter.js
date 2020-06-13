@@ -2,7 +2,7 @@
  * Main File for the GIF Conversion
  */
   
-function downloadGIF(sOrgVideoElem){
+function downloadGIF(sOrgVideoElem, sFileName){
     orgVideoElem = document.getElementById(sOrgVideoElem);
 
     // This Function creates a new A Element, adds the GIF file as HREF and clicks to download the GIF.
@@ -51,7 +51,7 @@ function downloadGIF(sOrgVideoElem){
         gif.on(
             'finished', 
             function(blob) {
-                saveData(URL.createObjectURL(blob), "screenrecording.gif");
+                saveData(URL.createObjectURL(blob), sFileName);
                 
                 loaderElem.style.display = "none";
                 orgVideoElem.controls    = true;
