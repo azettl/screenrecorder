@@ -1,6 +1,7 @@
 :root{
     --button-color:#6ac2b6;
     --button-color-hover:#009688;
+    --button-color-active:#ff5722;
     --text-color:#333;
 }
 
@@ -104,6 +105,10 @@
     button:hover, .button:hover{
         background: var(--button-color-hover);
     }
+
+    button:active, .button:active{
+        background: var(--button-color-active);
+    }
 /* END:: Buttons */
 
 /* START:: Scrollbar */
@@ -119,6 +124,10 @@
 
     ::-webkit-scrollbar-thumb:hover{
         background-color: var(--button-color-hover);
+    }
+
+    ::-webkit-scrollbar-thumb:active{
+        background-color: var(--button-color-active);
     }
 
     ::-webkit-scrollbar-track {
@@ -183,6 +192,9 @@ input[type=range]::-webkit-slider-thumb{
 input[type=range]::-webkit-slider-thumb:hover{
     background-color: var(--button-color-hover);
 }
+input[type=range]::-webkit-slider-thumb:active{
+    background-color: var(--button-color-active);
+}
 
 input[type=range]::-moz-range-thumb{
     -webkit-appearance: none;
@@ -197,6 +209,9 @@ input[type=range]::-moz-range-thumb{
 input[type=range]::-moz-range-thumb:hover{
     background-color: var(--button-color-hover);
 }
+input[type=range]::-moz-range-thumb:active{
+    background-color: var(--button-color-active);
+}
 
 input[type=range]::-ms-thumb{
     -webkit-appearance: none;
@@ -210,6 +225,9 @@ input[type=range]::-ms-thumb{
 
 input[type=range]::-ms-thumb:hover{
     background-color: var(--button-color-hover);
+}
+input[type=range]::-ms-thumb:active{
+    background-color: var(--button-color-active);
 }
 
 datalist{
