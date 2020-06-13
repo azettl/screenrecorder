@@ -32,6 +32,9 @@ async function startCapture() {
     let videoChunks = document.getElementById("videoChunks");
     videoChunks.innerHTML = "";
     videoElem.src = "";
+    chunkRecordings = [];
+    chunkRecordingsRaw = [];
+
     if (recordingMP4) {
       window.URL.revokeObjectURL(recordingMP4);
     }
@@ -99,6 +102,7 @@ function stopCapture(evt) {
 
   videoElem.srcObject = null;
   videoElem.src = recordingWEBM;
+  videoElem.play();
 
   var iChunkCount = 1;
   chunkRecordings.forEach(
