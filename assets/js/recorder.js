@@ -63,65 +63,120 @@
             // Get the Current Screen and assign it to the Video Elements Source Object 
             // and the currentVideo Constant. Stop the Recording when the User Stops Sharing his Screen
             // via the "inactive" Event.
-            const currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
-                {
-                    video: {
-                        cursor: "always"
-                    },
-                    audio: true
-                }
-            );
+                const currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
+                    {
+                        video: {
+                            cursor: "always"
+                        },
+                        audio: true
+                    }
+                );
 
-            currentVideo.addEventListener(
-                'inactive', 
-                (event) => {
-                    stopCapture(event);
-                }
-            );
+                currentVideo.addEventListener(
+                    'inactive', 
+                    (event) => {
+                        stopCapture(event);
+                    }
+                );
 
-    const mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
-    mediaRecorder.addEventListener('dataavailable', event => {
-      if (event.data && event.data.size > 0) {
-        aFullChunkRecordings.push(event.data);
-      }
-    });
+            // Define the MediaRecorder for the Full Video Recording and Push the Data to the 
+            // aFullChunkRecordings Array whenever Data is Available.
+                const mediaRecorder = new MediaRecorder(
+                    currentVideo, 
+                    {
+                        mimeType: 'video/webm'
+                    }
+                );
 
-    var singleChunks = [];
-    // First Chunk
-    const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
-    mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
-    mediaRecorderCunk.onstop = function(e){
-        aSingleChunkRecordings.push(new Blob(singleChunks));
-    };
-    mediaRecorderCunk.start(10);
-    setTimeout(
-        function(){
-            mediaRecorderCunk.stop()
-        }, 
-        1000
-    );
-    // Other Chunks
-    oSingleChunkInterval = setInterval(()=>{
-        const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
-        mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
-        mediaRecorderCunk.onstop = function(e){
-            aSingleChunkRecordings.push(new Blob(singleChunks));
-        };
-        mediaRecorderCunk.start(10);
-        setTimeout(
-            function(){
-                mediaRecorderCunk.stop()
-            }, 
-            1000
-        );
-    }, 1000);
+                mediaRecorder.addEventListener(
+                    'dataavailable', 
+                    (event) => {
+                        if (event.data && event.data.size > 0) {
+                            aFullChunkRecordings.push(event.data);
+                        }
+                    }
+                );
 
-    mediaRecorder.start(10);
-    isRecordingRunning = true;
-  } catch(err) {
-    console.error("Error: " + err);
-  }
-} 
+                // Start Recording and Set the isRecordingRunning Variable to TRUE
+                mediaRecorder.start(10);
+                isRecordingRunning = true;
+
+                // Define the MediaRecorders for the Single One Second Chunks
+                var singleChunks = [];
+
+                // The First Chunk is handled Outside of the Interval and Push the Data to the 
+                // singleChunks Array whenever Data is Available. When the Recording Stops then
+                // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
+                // a BLOB.
+                    const mediaRecorderCunk = new MediaRecorder(
+                        currentVideo, 
+                        {
+                            mimeType: 'video/webm'
+                        }
+                    );    
+
+                    mediaRecorderCunk.addEventListener(
+                        'dataavailable', 
+                        (event) => {
+                            if (event.data && event.data.size > 0) {
+                                singleChunks.push(event.data);
+                            }
+                        }
+                    );
+
+                    mediaRecorderCunk.onstop = function(e){
+                        aSingleChunkRecordings.push(new Blob(singleChunks));
+                    };
+
+                    // Start the Recording and Stop after One Second
+                    mediaRecorderCunk.start(10);
+                    setTimeout(
+                        function(){
+                            mediaRecorderCunk.stop()
+                        }, 
+                        1000
+                    );
+
+                // The Other Chunks are handled Inside the Interval and Push the Data to the 
+                // singleChunks Array whenever Data is Available. When the Recording Stops then
+                // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
+                // a BLOB.
+                    oSingleChunkInterval = setInterval(()=>{
+                        const mediaRecorderCunk = new MediaRecorder(
+                            currentVideo, 
+                            {
+                                mimeType: 'video/webm'
+                            }
+                        );    
+
+                        mediaRecorderCunk.addEventListener(
+                            'dataavailable', 
+                            (event) => {
+                                if (event.data && event.data.size > 0) {
+                                    singleChunks.push(event.data);
+                                }
+                            }
+                        );
+
+                        mediaRecorderCunk.onstop = function(e){
+                            aSingleChunkRecordings.push(new Blob(singleChunks));
+                        };
+                        
+                        // Start the Recording and Stop after One Second
+                        mediaRecorderCunk.start(10);
+                        setTimeout(
+                            function(){
+                                mediaRecorderCunk.stop()
+                            }, 
+                            1000
+                        );
+                    }, 
+                    1000
+                );
+        } catch(err) {
+            console.error("Error: " + err);
+        }
+    } 
 
 function stopCapture(evt) {
   loaderElem.style.display = "block";
