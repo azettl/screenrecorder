@@ -29,9 +29,10 @@ video.chunk{
     margin-right:2rem;
 }
 
-.videoChunks{
+#videoChunks{
     display: flex;
-    overflow-x: auto
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 #resultLinkMP4,
