@@ -164,6 +164,7 @@
                         };
                         
                         // Start the Recording and Stop after One Second
+                        console.log((chunkLeElem.value * 1000));
                         mediaRecorderCunk.start(10);
                         setTimeout(
                             function(){
