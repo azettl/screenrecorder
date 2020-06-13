@@ -176,8 +176,25 @@ function stopCapture(evt) {
  // window.URL.revokeObjectURL(videoChunkBlob);
   //videoChunks.appendChild(videoChunkElem);
   //videoElem.play();
-  document.getElementById("loader").style.display = "none";
 } 
+
+// set up the mutation observer
+var observer = new MutationObserver(function (mutations, me) {
+    // `mutations` is an array of mutations that occurred
+    // `me` is the MutationObserver instance
+    var canvas = document.getElementById('videoChunks');
+    if (canvas) {
+      document.getElementById("loader").style.display = "none";
+      me.disconnect(); // stop observing
+      return;
+    }
+  });
+
+  // start observing
+observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
 
 function dumpOptionsInfo() {
   const videoTrack = videoElem.srcObject.getVideoTracks()[0];
