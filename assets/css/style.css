@@ -17,8 +17,8 @@ body{
 #video {
     border: 2px solid;
     border-radius: .25rem;
-width: 98%;
-max-width: 860px;
+width: 100%;
+max-width: 720px;
 }
 
 #resultLinkMP4,
@@ -28,6 +28,16 @@ max-width: 860px;
 
 h1{
     font-size: 4rem;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr) );
+    grid-gap: 1rem;
+}
+
+button{
+    grid-column: 1 / 3;
 }
 
 button, .button{
