@@ -59,6 +59,7 @@ async function startCapture() {
 function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
 
+  tracks.forEach(track => console.log(track));
   tracks.forEach(track => track.stop());
   
   recordingMP4 = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));

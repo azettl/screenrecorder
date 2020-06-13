@@ -17,7 +17,7 @@ body{
 #video {
     border: 2px solid;
     border-radius: .25rem;
-width: 100%;
+width: calc(100% - 4px);
 max-width: 720px;
 }
 
