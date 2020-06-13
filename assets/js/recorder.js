@@ -339,15 +339,17 @@
         );
 
         
-
+            console.log(document.querySelectorAll("#videoChunks > div > video"));
         gifshot.createGIF({
-            'video': document.querySelectorAll("#videoChunks > video")
+            'video': document.querySelectorAll("#videoChunks > div > video")
           },function(obj) {
             if(!obj.error) {
               var image = obj.image,
               animatedImage = document.createElement('img');
               animatedImage.src = image;
               document.body.appendChild(animatedImage);
+            }else{
+                console.log(obj.error);
             }
           });
 
