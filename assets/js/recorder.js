@@ -108,12 +108,13 @@
                 );
 
                 // Start Recording and Set the isRecordingRunning Variable to TRUE
-                mediaRecorder.start(10);
+                var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
+
+                mediaRecorder.start(iSingleChunkLengthInMS);
                 isRecordingRunning = true;
 
                 // Define the MediaRecorders for the Single One Second Chunks
                 var singleChunks = [];
-                var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -220,7 +221,7 @@
         // Change Chunk Header
             var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
             var sSpelledNumber         = "";
-            
+
             switch (iSingleChunkLengthInMS){
                 case 1000:
                     sSpelledNumber = "One";
@@ -268,7 +269,7 @@
                     sSpelledNumber = "Fifteen";
                     break;
             }
-            chunksHElem.innerHTML = "&#127916; " + sSpelledNumber + (iSingleChunkLengthInMS == 1000 ? " Second" : " Seconds") + " Chunks";
+            chunksHElem.innerHTML = "&#127916; " + sSpelledNumber + " Second Chunks";
 
         // Display the Loader
             loaderElem.style.display = "block";
@@ -318,8 +319,9 @@
 
                 var videoChunkElem = document.createElement("video");
                 videoChunkElem.setAttribute("controls", "true");
+                videoChunkElem.setAttribute("playsinline", "true");
                 videoChunkElem.setAttribute("controlsList", "nodownload");
-
+                 
                 var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
                 videoChunkElem.src = videoChunkBlob;
                 videoChunkDivElem.appendChild(videoChunkElem);
