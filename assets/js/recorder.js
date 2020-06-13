@@ -9,6 +9,7 @@
     const chunksElem  = document.getElementById("videoChunks");
     const chunksHElem = document.getElementById("videoChunksHeading");
     const webmDowElem = document.getElementById("resultLinkWEBM");
+    const chunkLeElem = document.getElementById("singleChunkLengthInSec");
 
 // Define Global Variables
     var isRecordingRunning     = false;
@@ -134,7 +135,7 @@
                         function(){
                             mediaRecorderCunk.stop()
                         }, 
-                        1000
+                        (chunkLeElem.value * 1000)
                     );
 
                 // The Other Chunks are handled Inside the Interval and Push the Data to the 
@@ -168,10 +169,10 @@
                             function(){
                                 mediaRecorderCunk.stop()
                             }, 
-                            1000
+                            (chunkLeElem.value * 1000)
                         );
                     }, 
-                    1000
+                    (chunkLeElem.value * 1000)
                 );
         } catch(err) {
             console.error("Error: " + err);
