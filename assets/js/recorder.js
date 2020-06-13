@@ -122,12 +122,12 @@ function stopCapture(evt) {
   var newChunks = [];
   removed.forEach(
     function(chunkRecording){
-        newChunks.push(new Blob(chunkRecording, {type: 'video/webm'}));
+        newChunks.push(new Blob(chunkRecording));
     }
   );
 
-  var videoChunkBlob = window.URL.createObjectURL(new Blob(newChunks, {type: 'video/webm'}));
-  videoChunkElem.src = videoChunkBlob;
+  var newvideoChunkBlob = window.URL.createObjectURL(new Blob(newChunks, {type: 'video/webm'}));
+  videoChunkElem.src = newvideoChunkBlob;
  // window.URL.revokeObjectURL(videoChunkBlob);
   videoChunks.appendChild(videoChunkElem);
   //videoElem.play();
