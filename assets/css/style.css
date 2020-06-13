@@ -154,4 +154,12 @@ input[type="range"]{
     margin:0;
     background: transparent;
 }
+
+datalist{
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    overflow: hidden;
+    margin-top: -1rem;
+}
 /* END:: Range Input */
