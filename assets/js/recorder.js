@@ -19,6 +19,8 @@
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
+    var aMediaRecordersChunks  = [];
+    var iMediaRecordersChunkC  = 0;
 
 // Hide Loader Element when the DOM Content is Loaded
     document.addEventListener(
@@ -113,14 +115,14 @@
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
-                    const mediaRecorderCunk = new MediaRecorder(
+                    aMediaRecordersChunks[iMediaRecordersChunkC] = new MediaRecorder(
                         currentVideo, 
                         {
                             mimeType: 'video/webm'
                         }
                     );    
 
-                    mediaRecorderCunk.addEventListener(
+                    aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
@@ -129,15 +131,15 @@
                         }
                     );
 
-                    mediaRecorderCunk.onstop = function(e){
+                    aMediaRecordersChunks[iMediaRecordersChunkC].onstop = function(e){
                         aSingleChunkRecordings.push(new Blob(singleChunks));
                     };
 
                     // Start the Recording and Stop after One Second
-                    mediaRecorderCunk.start(10);
+                    aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                     setTimeout(
                         function(){
-                            mediaRecorderCunk.stop()
+                            aMediaRecordersChunks[iMediaRecordersChunkC].stop()
                         }, 
                         iSingleChunkLengthInMS
                     );
@@ -147,14 +149,16 @@
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
                     oSingleChunkInterval = setInterval(()=>{
-                        var mediaRecorderCunk = new MediaRecorder(
+                        iMediaRecordersChunkC++;
+                        
+                        aMediaRecordersChunks[iMediaRecordersChunkC] = new MediaRecorder(
                             currentVideo, 
                             {
                                 mimeType: 'video/webm'
                             }
                         );    
 
-                        mediaRecorderCunk.addEventListener(
+                        aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
@@ -163,15 +167,15 @@
                             }
                         );
 
-                        mediaRecorderCunk.onstop = function(e){
+                        aMediaRecordersChunks[iMediaRecordersChunkC].onstop = function(e){
                             aSingleChunkRecordings.push(new Blob(singleChunks));
                         };
                         
                         // Start the Recording and Stop after One Second
-                        mediaRecorderCunk.start(10);
+                        aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                         setTimeout(
                             function(){
-                                mediaRecorderCunk.stop()
+                                aMediaRecordersChunks[iMediaRecordersChunkC].stop()
                             }, 
                             iSingleChunkLengthInMS
                         );
