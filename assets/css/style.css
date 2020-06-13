@@ -22,11 +22,15 @@ max-width: 720px;
 }
 
 .chunk{
+    display: inline-block;
+    margin:2rem 2rem 2rem 0;
+}
+
+.chunk video{
     border: 2px solid;
     border-radius: .25rem;
     width:160px;
-    display: inline-block;
-    margin:2rem 2rem 2rem 0;
+    display: block;
 }
 
 #videoChunks{
