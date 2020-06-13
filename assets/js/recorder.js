@@ -318,6 +318,7 @@
                 videoChunkDivElem.appendChild(videoChunkHeadElem);
 
                 var videoChunkElem = document.createElement("video");
+                videoChunkElem.id = "video" + iChunkCount;
                 videoChunkElem.setAttribute("controls", "true");
                 videoChunkElem.setAttribute("playsinline", "true");
                 videoChunkElem.setAttribute("controlsList", "nodownload");
@@ -333,6 +334,13 @@
                 videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
                 videoChunkDivElem.appendChild(videoChunkAElem);
 
+                var videoChunkAGIFElem = document.createElement("a");
+                videoChunkAGIFElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download GIF';
+                videoChunkAGIFElem.classList.add("button");
+                videoChunkAGIFElem.classList.add("downloadgif");
+                videoChunkAGIFElem.dataset.videoelement = "video" + iChunkCount;
+                videoChunkDivElem.appendChild(videoChunkAGIFElem);
+
                 chunksElem.appendChild(videoChunkDivElem);
 
                 iChunkCount++;
@@ -342,65 +350,3 @@
         // Hide the Loader Element
         loaderElem.style.display = "none";
     }
-
-    var saveData = (function () {
-        var a = document.createElement("a");
-        a.style = "display: none";
-        document.body.appendChild(a);
-        return function (url, fileName) {
-            a.href = url;
-            a.download = fileName;
-            a.click();
-            window.URL.revokeObjectURL(url);
-        };
-    }());
-    
-    videoElem.addEventListener(
-        "loadeddata", 
-        (event) => {
-console.log(videoElem.videoWidth);
-    var capture, gif, sampleInterval, startTime, timer;
-  gif = new GIF({
-    workers: 4,
-    workerScript: 'assets/js/gif.worker.js',
-    width: videoElem.videoWidth,
-    height: videoElem.videoHeight
-  });
-  startTime = null;
-  sampleInterval = 500;
-  gifDowElem.addEventListener(
-    'click', 
-    (event) => {
-        
-        loaderElem.style.display = "block";
-    videoElem.pause();
-    videoElem.currentTime = 0;
-    gif.abort();
-    gif.frames = [];
-    videoElem.play();
-    }
-    );
-  gif.on('start', function() {
-    return startTime = now();
-  });
-  gif.on('progress', function(p) {
-  });
-  gif.on('finished', function(blob) {
-    saveData(URL.createObjectURL(blob), "screenrecording.gif");
-    loaderElem.style.display = "none";
-  });
-  timer = null;
-  capture = function() {
-    return gif.addFrame(videoElem, {
-      copy: true,
-      delay: sampleInterval
-    });
-  };
-  videoElem.addEventListener('play', function() {
-    clearInterval(timer);
-    return timer = setInterval(capture, sampleInterval);
-  });
-  videoElem.addEventListener('ended', function() {
-    clearInterval(timer);
-    return gif.render();
-  });});
