@@ -155,6 +155,31 @@ input[type="range"]{
     background: transparent;
 }
 
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: var(--button-color);
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
+    cursor: pointer;
+  }
+  
+  /* All the same stuff for Firefox */
+  input[type=range]::-moz-range-thumb {
+    background-color: var(--button-color);
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
+    cursor: pointer;
+  }
+  
+  /* All the same stuff for IE */
+  input[type=range]::-ms-thumb {
+    background-color: var(--button-color);
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
+    cursor: pointer;
+  }
+
 datalist{
     display: flex;
     justify-content: space-between;
