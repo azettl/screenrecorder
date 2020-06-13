@@ -371,6 +371,8 @@ console.log(videoElem.videoWidth);
   gifDowElem.addEventListener(
     'click', 
     (event) => {
+        
+        loaderElem.style.display = "block";
     videoElem.pause();
     videoElem.currentTime = 0;
     gif.abort();
@@ -385,6 +387,7 @@ console.log(videoElem.videoWidth);
   });
   gif.on('finished', function(blob) {
     saveData(URL.createObjectURL(blob), "screenrecording.gif");
+    loaderElem.style.display = "none";
   });
   timer = null;
   capture = function() {
