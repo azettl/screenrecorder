@@ -58,9 +58,20 @@ async function startCapture() {
 
 function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
-
+  let videoChunks = document.getElementById("videoChunks");
   tracks.forEach(track => track.stop());
-  chunks.forEach(chunk => console.log(chunk));
+  chunks.forEach(
+      function(chunk){
+        console.log(chunk);
+        var videoChunkElem = document.createElement("video");
+        videoChunkElem.setAttribute("controls", "true");
+
+        var videoChunkBlob = window.URL.createObjectURL(new Blob(chunk, {type: 'video/webm'}));
+        videoChunkElem.src = videoChunkBlob;
+
+        videoChunks.appendChild(videoChunkElem);
+      }
+  );
   
   recordingMP4 = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
   recordingWEBM = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
