@@ -108,13 +108,12 @@
                 );
 
                 // Start Recording and Set the isRecordingRunning Variable to TRUE
-                var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
-
-                mediaRecorder.start(iSingleChunkLengthInMS);
+                mediaRecorder.start(10);
                 isRecordingRunning = true;
 
                 // Define the MediaRecorders for the Single One Second Chunks
-                var singleChunks = [];
+                var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
+                var singleChunks           = [];
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -148,7 +147,7 @@
                     );
 
                     // Start the Recording and Stop after One Second
-                    aMediaRecordersChunks[iMediaRecordersChunkC].start(iSingleChunkLengthInMS);
+                    aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                     setTimeout(
                         function(){
                             if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
@@ -193,7 +192,7 @@
                         };
                         
                         // Start the Recording and Stop after One Second
-                        aMediaRecordersChunks[iMediaRecordersChunkC].start(iSingleChunkLengthInMS);
+                        aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                         setTimeout(
                             function(){
                                 if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
