@@ -98,6 +98,7 @@ function stopCapture(evt) {
       console.log(chunkRecording);
       var videoChunkElem = document.createElement("video");
       videoChunkElem.setAttribute("controls", "true");
+      videoChunkElem.classList.add("chunk");
 
       var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
       videoChunkElem.src = videoChunkBlob;

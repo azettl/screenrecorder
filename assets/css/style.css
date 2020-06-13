@@ -14,11 +14,19 @@ body{
     height: calc(100vh - 4rem);
 }
 
-#video {
+video {
     border: 2px solid;
     border-radius: .25rem;
 width: calc(100% - 4px);
 max-width: 720px;
+}
+
+video.chunk{
+    border: 2px solid;
+    border-radius: .25rem;
+    width:160px;
+    display: inline-block;
+    margin-right:2rem;
 }
 
 #resultLinkMP4,
