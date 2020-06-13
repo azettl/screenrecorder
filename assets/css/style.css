@@ -29,8 +29,14 @@ max-width: 720px;
 .chunk video{
     border: 2px solid;
     border-radius: .25rem;
-    width:160px;
+    width:calc(100% - 4px);
+    min-width: 160px;
     display: block;
+}
+
+.chunk .button{
+    margin-top:1rem;
+    width:12rem;
 }
 
 #videoChunks{
