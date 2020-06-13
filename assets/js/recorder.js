@@ -106,6 +106,8 @@
                 var singleChunks = [];
                 var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
                 console.log(iSingleChunkLengthInMS);
+                console.log(chunkLeElem.value);
+                console.log(parseInt(chunkLeElem.value));
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
