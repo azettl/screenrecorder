@@ -266,7 +266,7 @@
                     sSpelledNumber = "Fifteen";
                     break;
             }
-            chunksHElem.innerHTML = "&#127916; " + sSpelledNumber + " Second Chunks";
+            chunksHElem.innerHTML = "&#127916; " + sSpelledNumber + (iSingleChunkLengthInMS == 1000 ? " Second" : " Seconds") + " Chunks";
 
         // Display the Loader
             loaderElem.style.display = "block";
