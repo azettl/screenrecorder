@@ -333,6 +333,19 @@
                 videoChunkDivElem.appendChild(videoChunkAElem);
 
                 chunksElem.appendChild(videoChunkDivElem);
+
+
+                gifshot.createGIF({
+                    'video': [videoChunkElem]
+                  },function(obj) {
+                    if(!obj.error) {
+                      var image = obj.image,
+                      animatedImage = document.createElement('img');
+                      animatedImage.src = image;
+                      chunksElem.appendChild(animatedImage);
+                    }
+                  });
+
                 iChunkCount++;
             }
         );
