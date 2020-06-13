@@ -34,6 +34,7 @@ async function startCapture() {
     videoElem.src = "";
     chunkRecordings = [];
     chunkRecordingsRaw = [];
+    chunks = [];
 
     if (recordingMP4) {
       window.URL.revokeObjectURL(recordingMP4);
