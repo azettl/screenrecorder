@@ -343,6 +343,17 @@
         loaderElem.style.display = "none";
     }
 
+    var saveData = (function () {
+        var a = document.createElement("a");
+        a.style = "display: none";
+        document.body.appendChild(a);
+        return function (url, fileName) {
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+    }());
     
     videoElem.addEventListener(
         "loadeddata", 
@@ -356,7 +367,7 @@ console.log(videoElem.videoWidth);
     height: videoElem.videoHeight
   });
   startTime = null;
-  sampleInterval = 100;
+  sampleInterval = 500;
   gifDowElem.addEventListener(
     'click', 
     (event) => {
@@ -373,12 +384,7 @@ console.log(videoElem.videoWidth);
   gif.on('progress', function(p) {
   });
   gif.on('finished', function(blob) {
-    var delta, img;
-    img = document.createElement('img');
-    img.src = URL.createObjectURL(blob);
-    window.open(img.src);
-    document.body.appendChild(img);
-    delta = now() - startTime;
+    saveData(URL.createObjectURL(blob), "screenrecording.gif");
   });
   timer = null;
   capture = function() {
