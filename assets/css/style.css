@@ -156,8 +156,26 @@ input[type="range"]{
     outline:0;
 }
 
-input[type=range]::-webkit-slider-thumb,
-input[type=range]::-moz-range-thumb,
+input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background-color: var(--button-color);
+    height:2rem;
+    width:2rem;
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
+    cursor: pointer;
+}
+
+input[type=range]::-moz-range-thumb{
+    -webkit-appearance: none;
+    background-color: var(--button-color);
+    height:2rem;
+    width:2rem;
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
+    cursor: pointer;
+}
+
 input[type=range]::-ms-thumb{
     -webkit-appearance: none;
     background-color: var(--button-color);
@@ -166,7 +184,6 @@ input[type=range]::-ms-thumb{
     border-radius: .25rem;
     border: 2px solid var(--text-color);
     cursor: pointer;
-    margin-top: -14px;
 }
 
 datalist{
