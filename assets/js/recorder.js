@@ -114,9 +114,6 @@
                 // Define the MediaRecorders for the Single One Second Chunks
                 var singleChunks = [];
                 var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
-                console.log(iSingleChunkLengthInMS);
-                console.log(chunkLeElem.value);
-                console.log(parseInt(chunkLeElem.value));
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -219,6 +216,57 @@
 
         // Set Button Label to Start Capture
             buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
+
+        // Change Chunk Header
+            var sSpelledNumber = "";
+            switch (iSingleChunkLengthInMS){
+                case 1000:
+                    sSpelledNumber = "One";
+                    break;
+                case 2000:
+                    sSpelledNumber = "Two";
+                    break;
+                case 3000:
+                    sSpelledNumber = "Three";
+                    break;
+                case 4000:
+                    sSpelledNumber = "Four";
+                    break;
+                case 5000:
+                    sSpelledNumber = "Five";
+                    break;
+                case 6000:
+                    sSpelledNumber = "Six";
+                    break;
+                case 7000:
+                    sSpelledNumber = "Seven";
+                    break;
+                case 8000:
+                    sSpelledNumber = "Eight";
+                    break;
+                case 9000:
+                    sSpelledNumber = "Nine";
+                    break;
+                case 10000:
+                    sSpelledNumber = "Ten";
+                    break;
+                case 11000:
+                    sSpelledNumber = "Eleven";
+                    break;
+                case 12000:
+                    sSpelledNumber = "Twelve";
+                    break;
+                case 13000:
+                    sSpelledNumber = "Thirteen";
+                    break;
+                case 14000:
+                    sSpelledNumber = "Fourteen";
+                    break;
+                case 15000:
+                    sSpelledNumber = "Fifteen";
+                    break;
+            }
+            chunksHElem.innerHTML = "&#127916; " + sSpelledNumber + " Second Chunks";
 
         // Display the Loader
             loaderElem.style.display = "block";
