@@ -29,6 +29,9 @@ buttonElem.addEventListener("click", function(evt) {
 async function startCapture() {
 
     videoElem.srcObject = null;
+    let videoChunks = document.getElementById("videoChunks");
+    videoChunks.innerHTML = "";
+    videoElem.src = "";
     if (recordingMP4) {
       window.URL.revokeObjectURL(recordingMP4);
     }
@@ -98,7 +101,6 @@ function stopCapture(evt) {
   videoElem.src = recordingWEBM;
 
   var iChunkCount = 1;
-  videoChunks.innerHTML = "";
   chunkRecordings.forEach(
     function(chunkRecording){
       console.log(chunkRecording);
