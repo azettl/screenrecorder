@@ -5,6 +5,7 @@ var running = false;
 var chunkRecordings = [];
 var recordingMP4 = null;
 var recordingWEBM = null;
+var int = null;
 // Options for getDisplayMedia()
 
 var displayMediaOptions = {
@@ -51,14 +52,13 @@ async function startCapture() {
     });
 
     var singleChunks = [];
-    let int = setInterval(()=>{
+    int = setInterval(()=>{
         const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
         mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
         mediaRecorderCunk.onstop = e => chunkRecordings.push(new Blob(singleChunks));
         mediaRecorderCunk.start(10);
         setTimeout(
             function(){
-                clearInterval(int);
                 mediaRecorderCunk.stop()
             }, 
             1000
@@ -74,6 +74,7 @@ async function startCapture() {
 } 
 
 function stopCapture(evt) {
+  clearInterval(int);
   let tracks = videoElem.srcObject.getTracks();
   let videoChunks = document.getElementById("videoChunks");
   tracks.forEach(track => track.stop());
