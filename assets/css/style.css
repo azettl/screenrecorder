@@ -21,7 +21,7 @@ width: calc(100% - 4px);
 max-width: 720px;
 }
 
-video.chunk{
+.chunk{
     border: 2px solid;
     border-radius: .25rem;
     width:160px;
