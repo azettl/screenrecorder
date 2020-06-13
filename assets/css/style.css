@@ -29,19 +29,18 @@ video {
 .chunk{
     display: inline-block;
     margin:0 2rem 2rem 0;
+    width:12rem;
 }
 
 .chunk video{
-    border: 2px solid;
-    border-radius: .25rem;
     width:calc(100% - 4px);
     min-width: 160px;
     display: block;
 }
 
 .chunk .button{
+    width:calc(100% - 4px);
     margin-top:1rem;
-    width:12rem;
 }
 
 #videoChunks{
