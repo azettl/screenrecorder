@@ -2,7 +2,9 @@
  * Main File for the GIF Conversion
  */
   
-function downloadGIF(orgVideoElem){
+function downloadGIF(sOrgVideoElem){
+    orgVideoElem = document.getElementById(sOrgVideoElem);
+    
     var saveData = (function () {
         var a = document.createElement("a");
         a.style = "display: none";
