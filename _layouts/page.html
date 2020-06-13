@@ -30,6 +30,25 @@
                 <a href="#" id="resultLinkWEBM" class="button" download="screenrecording.webm">
                     <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM
                 </a>
+                <label for="singleChunkLengthInSec">Single Chunk Length in Seconds</label>
+                <input type="range" id="singleChunkLengthInSec" min="1" max="15" list="tickmarks">
+                <datalist id="tickmarks">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </datalist>
             </p>
 
             <video id="video" controlsList="nodownload" autoplay controls loop src="assets/sample.mp4"></video>
