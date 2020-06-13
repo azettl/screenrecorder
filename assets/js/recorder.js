@@ -273,12 +273,12 @@
         // Display the Loader
             loaderElem.style.display = "block";
 
-        // Clear the Interval for the Single Chunk Recording
-            clearInterval(oSingleChunkInterval);
-
         // Stop all the Tracks on the Video Elements Source Object
             let tracks = videoElem.srcObject.getTracks();
             tracks.forEach(track => track.stop());
+
+        // Clear the Interval for the Single Chunk Recording
+            clearInterval(oSingleChunkInterval);
   
         // Create a Object URL of the Full Recording as WEBM
             oFullObjectURL = window.URL.createObjectURL(
