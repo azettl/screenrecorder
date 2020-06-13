@@ -64,7 +64,6 @@
     .chunk{
         display: inline-block;
         margin:0 2rem 2rem 0;
-        width:14rem;
     }
 
     .chunk video{
@@ -74,7 +73,7 @@
     }
 
     .chunk .button{
-        width:calc(100% - 4px - 4rem);
+        width:12rem;
         margin-top:1rem;
     }
 /* END:: Single Chunk */
