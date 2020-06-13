@@ -306,8 +306,6 @@
             videoElem.srcObject = null;
             videoElem.src       = oFullObjectURL;
 
-            videoElem.play();
-
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
         // chunk and WEBM download link.
         var iChunkCount = 1;
