@@ -339,7 +339,11 @@
             }
         );
 
-        var capture, gif, sampleInterval, startTime, timer;
+        // Hide the Loader Element
+        loaderElem.style.display = "none";
+    }
+
+    var capture, gif, sampleInterval, startTime, timer;
   gif = new GIF({
     workers: 4,
     workerScript: '/gif.js/gif.worker.js',
@@ -385,7 +389,3 @@
     clearInterval(timer);
     return gif.render();
   });
-
-        // Hide the Loader Element
-        loaderElem.style.display = "none";
-    }
