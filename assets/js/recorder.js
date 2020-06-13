@@ -178,53 +178,79 @@
         }
     } 
 
-function stopCapture(evt) {
-  loaderElem.style.display = "block";
-  clearInterval(oSingleChunkInterval);
-  let tracks = videoElem.srcObject.getTracks();
-  tracks.forEach(track => track.stop());
+// Definition of the stopCapture function
+    function stopCapture(evt) {
+        // Set the isRecordingRunning Variable to FALSE cause the stopped the Recording
+            isRecordingRunning = false;
+
+        // Set Button Label to Start Capture
+            buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
+
+        // Display the Loader
+            loaderElem.style.display = "block";
+
+        // Clear the Interval for the Single Chunk Recording
+            clearInterval(oSingleChunkInterval);
+
+        // Stop all the Tracks on the Video Elements Source Object
+            let tracks = videoElem.srcObject.getTracks();
+            tracks.forEach(track => track.stop());
   
-  oFullObjectURL = window.URL.createObjectURL(new Blob(aFullChunkRecordings, {type: 'video/webm'}));
-  isRecordingRunning = false;
-  buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
-  webmDowElem.addEventListener('progress', e => console.log(e));
-  webmDowElem.href = oFullObjectURL;
-  webmDowElem.style.display = "inline-block";
-  chunksHElem.style.display = "inline-block";
-
+        // Create a Object URL of the Full Recording as WEBM
+            oFullObjectURL = window.URL.createObjectURL(
+                new Blob(
+                    aFullChunkRecordings, 
+                    {
+                        type: 'video/webm'
+                    }
+                )
+            );
   
+        // Assign the Object URL to the WEBM Download Link for the Full Recording
+        // and Display the Download Link and Chunks Section.
+            webmDowElem.href          = oFullObjectURL;
+            webmDowElem.style.display = "inline-block";
+            chunksHElem.style.display = "inline-block";
 
-  videoElem.srcObject = null;
-  videoElem.src = oFullObjectURL;
-  videoElem.play();
+        // Remove the Old Source Object from the Video Element and Assign the new Object URL
+        // then Play the Video
+            videoElem.srcObject = null;
+            videoElem.src       = oFullObjectURL;
 
-  var iChunkCount = 1;
-  aSingleChunkRecordings.forEach(
-    function(chunkRecording){
-      var videoChunkDivElem = document.createElement("div");
-      videoChunkDivElem.classList.add("chunk");
+            videoElem.play();
 
-      var videoChunkHeadElem = document.createElement("h3");
-      videoChunkHeadElem.innerText = "Chunk #" + iChunkCount;
-      videoChunkDivElem.appendChild(videoChunkHeadElem);
+        // Loop through aSingleChunkRecordings and create a div including a header, video of the single
+        // chunk and WEBM download link.
+        var iChunkCount = 1;
 
-      var videoChunkElem = document.createElement("video");
-      videoChunkElem.setAttribute("controls", "true");
+        aSingleChunkRecordings.forEach(
+            function(chunkRecording){
+                var videoChunkDivElem = document.createElement("div");
+                videoChunkDivElem.classList.add("chunk");
 
-      var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
-      videoChunkElem.src = videoChunkBlob;
-      videoChunkDivElem.appendChild(videoChunkElem);
+                var videoChunkHeadElem = document.createElement("h3");
+                videoChunkHeadElem.innerText = "Chunk #" + iChunkCount;
+                videoChunkDivElem.appendChild(videoChunkHeadElem);
 
-      var videoChunkAElem = document.createElement("a");
-      videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
-      videoChunkAElem.classList.add("button");
-      videoChunkAElem.href = videoChunkBlob;
-      videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
-      videoChunkDivElem.appendChild(videoChunkAElem);
+                var videoChunkElem = document.createElement("video");
+                videoChunkElem.setAttribute("controls", "true");
 
-      chunksElem.appendChild(videoChunkDivElem);
-      iChunkCount++;
+                var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
+                videoChunkElem.src = videoChunkBlob;
+                videoChunkDivElem.appendChild(videoChunkElem);
+
+                var videoChunkAElem = document.createElement("a");
+                videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
+                videoChunkAElem.classList.add("button");
+                videoChunkAElem.href = videoChunkBlob;
+                videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
+                videoChunkDivElem.appendChild(videoChunkAElem);
+
+                chunksElem.appendChild(videoChunkDivElem);
+                iChunkCount++;
+            }
+        );
+
+        // Hide the Loader Element
+        loaderElem.style.display = "none";
     }
-  );
-  loaderElem.style.display = "none";
-} 
