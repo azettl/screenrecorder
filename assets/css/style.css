@@ -149,23 +149,12 @@
 /* START:: Range Input */
 input[type="range"]{
     -webkit-appearance: none;
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
 }
 
 input[type="range"]::-webkit-slider-runnable-track,
 input[type="range"]::-moz-range-thumb {
-    background: #ccc;
-}
-
-input[type="range"]::-ms-track {
     background: transparent;
-}
-
-input[type="range"]::-ms-fill-lower {
-    background: #e1e1e1;
-    border-radius: .25rem;
-}
-
-input[type="range"]::-ms-fill-upper {
-    background: #eee;
 }
 /* END:: Range Input */
