@@ -35,10 +35,9 @@
     buttonElem.addEventListener(
         "click", 
         (event) => {
-            chunksElem.innerHTML   = "";
-
             if(isRecordingRunning){
-                stopCapture();
+                videoElem.srcObject    = null;
+                videoElem.src          = "";
             }else{
                 startCapture();
             }
@@ -51,6 +50,7 @@
         // Clear Data from the Previous Recording
             videoElem.srcObject    = null;
             videoElem.src          = "";
+            chunksElem.innerHTML   = "";
             aSingleChunkRecordings = [];
             aFullChunkRecordings   = [];
 
