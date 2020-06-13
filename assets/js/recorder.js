@@ -120,6 +120,7 @@ function stopCapture(evt) {
   var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecordingsRaw, {type: 'video/webm'}));
   videoChunkElem.src = videoChunkBlob;
   window.URL.revokeObjectURL(videoChunkBlob);
+  videoChunks.appendChild(videoChunkElem);
   //videoElem.play();
 } 
 
