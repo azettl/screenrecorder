@@ -57,11 +57,11 @@ max-width: 720px;
 
 h1{
     font-size: 4rem;
+    word-break: break-all;
 }
 
 .buttons{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr) );
     grid-gap: 1rem;
 }
 
@@ -132,3 +132,7 @@ footer{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  header, article, footer {
+    padding: 0 2rem;
+}
