@@ -3,6 +3,7 @@ const buttonElem = document.getElementById("button");
 var chunks = [];
 var running = false;
 var chunkRecordings = [];
+var chunkRecordingsRaw = [];
 var recordingMP4 = null;
 var recordingWEBM = null;
 var int = null;
@@ -55,7 +56,10 @@ async function startCapture() {
     int = setInterval(()=>{
         const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
         mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
-        mediaRecorderCunk.onstop = e => chunkRecordings.push(singleChunks);
+        mediaRecorderCunk.onstop = function(e){
+            chunkRecordings.push(new Blob(singleChunks));
+            chunkRecordingsRaw.push(singleChunks);
+        };
         mediaRecorderCunk.start(10);
         setTimeout(
             function(){
@@ -101,12 +105,19 @@ function stopCapture(evt) {
       videoChunkElem.setAttribute("controls", "true");
       videoChunkElem.classList.add("chunk");
 
-      var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecording, {type: 'video/mp4'}));
+      var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
       videoChunkElem.src = videoChunkBlob;
 
       videoChunks.appendChild(videoChunkElem);
     }
   );
+
+  
+  var videoChunkElem = document.createElement("video");
+  videoChunkElem.setAttribute("controls", "true");
+  videoChunkElem.classList.add("chunkResult");
+  var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecordingsRaw, {type: 'video/webm'}));
+  videoChunkElem.src = videoChunkBlob;
   //videoElem.play();
 } 
 
