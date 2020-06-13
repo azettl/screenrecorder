@@ -77,18 +77,6 @@ function stopCapture(evt) {
   let tracks = videoElem.srcObject.getTracks();
   let videoChunks = document.getElementById("videoChunks");
   tracks.forEach(track => track.stop());
-  chunkRecordings.forEach(
-      function(chunkRecording){
-        console.log(chunkRecording);
-        var videoChunkElem = document.createElement("video");
-        videoChunkElem.setAttribute("controls", "true");
-
-        var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecording, {type: 'video/webm'}));
-        videoChunkElem.src = videoChunkBlob;
-
-        videoChunks.appendChild(videoChunkElem);
-      }
-  );
   
   recordingMP4 = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
   recordingWEBM = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
@@ -103,6 +91,20 @@ function stopCapture(evt) {
 
   videoElem.srcObject = null;
   videoElem.src = recordingWEBM;
+
+  
+  chunkRecordings.forEach(
+    function(chunkRecording){
+      console.log(chunkRecording);
+      var videoChunkElem = document.createElement("video");
+      videoChunkElem.setAttribute("controls", "true");
+
+      var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
+      videoChunkElem.src = videoChunkBlob;
+
+      videoChunks.appendChild(videoChunkElem);
+    }
+  );
   //videoElem.play();
 } 
 
