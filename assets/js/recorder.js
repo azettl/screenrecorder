@@ -3,40 +3,45 @@
  */
 
 // Define Element Constants
-const videoElem   = document.getElementById("video");
-const buttonElem  = document.getElementById("button");
-const loaderElem  = document.getElementById("loader");
-const chunksElem  = document.getElementById("videoChunks");
-const chunksHElem = document.getElementById("videoChunksHeading");
-const webmDowElem = document.getElementById("resultLinkWEBM");
+    const videoElem   = document.getElementById("video");
+    const buttonElem  = document.getElementById("button");
+    const loaderElem  = document.getElementById("loader");
+    const chunksElem  = document.getElementById("videoChunks");
+    const chunksHElem = document.getElementById("videoChunksHeading");
+    const webmDowElem = document.getElementById("resultLinkWEBM");
 
-var chunks = [];
-var running = false;
-var chunkRecordings = [];
-var chunkRecordingsRaw = [];
-var recordingWEBM = null;
-var int = null;
-// Options for getDisplayMedia()
+// Define Global Variables
+    var isRecordingRunning     = false;
 
-window.onload = function(){
-  loaderElem.style.display = "none";
-};
+    var oSingleChunkInterval   = null;
+    var oFullObjectURL         = null;
 
-var displayMediaOptions = {
-  video: {
-    cursor: "always"
-  },
-  audio: true
-};
+    var aSingleChunkRecordings = [];
+    var aFullChunkRecordings   = [];
 
-// Set event listeners for the start and stop buttons
-buttonElem.addEventListener("click", function(evt) {
-    if(running){
-        stopCapture();
-    }else{
-        startCapture();
-    }
-}, false);
+// Hide Loader Element when the DOM Content is Loaded
+    document.addEventListener(
+        "DOMContentLoaded", 
+        (event) => {
+            loaderElem.style.display = "none";
+        }
+    );
+
+// Attach Event Listener to the Start/Stop Recording Button
+    buttonElem.addEventListener(
+        "click", 
+        (event) => {
+            if(isRecordingRunning){
+                stopCapture();
+            }else{
+                startCapture();
+            }
+        }, 
+        false
+    );
+
+// Definition of the async startCapture function
+
 
 
 async function startCapture() {
@@ -45,19 +50,23 @@ async function startCapture() {
     let videoChunks = chunksElem;
     videoChunks.innerHTML = "";
     videoElem.src = "";
-    chunkRecordings = [];
-    chunkRecordingsRaw = [];
-    chunks = [];
+    aSingleChunkRecordings = [];
+    aFullChunkRecordings = [];
 
-    if (recordingWEBM) {
-      window.URL.revokeObjectURL(recordingWEBM);
+    if (oFullObjectURL) {
+      window.URL.revokeObjectURL(oFullObjectURL);
     }
   buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
   webmDowElem.style.display = "none";
   chunksHElem.style.display = "none";
 
   try {
-    var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia({
+        video: {
+          cursor: "always"
+        },
+        audio: true
+      });
     currentVideo.addEventListener('inactive', e => {
       stopCapture(e);
     });
@@ -65,7 +74,7 @@ async function startCapture() {
     const mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
     mediaRecorder.addEventListener('dataavailable', event => {
       if (event.data && event.data.size > 0) {
-        chunks.push(event.data);
+        aFullChunkRecordings.push(event.data);
       }
     });
 
@@ -74,8 +83,7 @@ async function startCapture() {
     const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
     mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
     mediaRecorderCunk.onstop = function(e){
-        chunkRecordings.push(new Blob(singleChunks));
-        chunkRecordingsRaw.push(singleChunks);
+        aSingleChunkRecordings.push(new Blob(singleChunks));
     };
     mediaRecorderCunk.start(10);
     setTimeout(
@@ -85,12 +93,11 @@ async function startCapture() {
         1000
     );
     // Other Chunks
-    int = setInterval(()=>{
+    oSingleChunkInterval = setInterval(()=>{
         const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
         mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
         mediaRecorderCunk.onstop = function(e){
-            chunkRecordings.push(new Blob(singleChunks));
-            chunkRecordingsRaw.push(singleChunks);
+            aSingleChunkRecordings.push(new Blob(singleChunks));
         };
         mediaRecorderCunk.start(10);
         setTimeout(
@@ -102,8 +109,7 @@ async function startCapture() {
     }, 1000);
 
     mediaRecorder.start(10);
-    running = true;
-    dumpOptionsInfo();
+    isRecordingRunning = true;
   } catch(err) {
     console.error("Error: " + err);
   }
@@ -111,27 +117,27 @@ async function startCapture() {
 
 function stopCapture(evt) {
   loaderElem.style.display = "block";
-  clearInterval(int);
+  clearInterval(oSingleChunkInterval);
   let tracks = videoElem.srcObject.getTracks();
   let videoChunks = chunksElem;
   tracks.forEach(track => track.stop());
   
-  recordingWEBM = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
-  running = false;
+  oFullObjectURL = window.URL.createObjectURL(new Blob(aFullChunkRecordings, {type: 'video/webm'}));
+  isRecordingRunning = false;
   buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
   webmDowElem.addEventListener('progress', e => console.log(e));
-  webmDowElem.href = recordingWEBM;
+  webmDowElem.href = oFullObjectURL;
   webmDowElem.style.display = "inline-block";
   chunksHElem.style.display = "inline-block";
 
   
 
   videoElem.srcObject = null;
-  videoElem.src = recordingWEBM;
+  videoElem.src = oFullObjectURL;
   videoElem.play();
 
   var iChunkCount = 1;
-  chunkRecordings.forEach(
+  aSingleChunkRecordings.forEach(
     function(chunkRecording){
       var videoChunkDivElem = document.createElement("div");
       videoChunkDivElem.classList.add("chunk");
@@ -158,33 +164,5 @@ function stopCapture(evt) {
       iChunkCount++;
     }
   );
-
-  
-  var videoChunkElem = document.createElement("video");
-  videoChunkElem.setAttribute("controls", "true");
-  videoChunkElem.classList.add("chunkResult");
-
-  var removed = chunkRecordingsRaw;
-  var newChunks = [];
-  removed.forEach(
-    function(chunkRecording){
-        newChunks.push(new Blob(chunkRecording));
-    }
-  );
-
-  var newvideoChunkBlob = window.URL.createObjectURL(new Blob(newChunks, {type: 'video/webm'}));
-  videoChunkElem.src = newvideoChunkBlob;
   loaderElem.style.display = "none";
- // window.URL.revokeObjectURL(videoChunkBlob);
-  //videoChunks.appendChild(videoChunkElem);
-  //videoElem.play();
 } 
-
-function dumpOptionsInfo() {
-  const videoTrack = videoElem.srcObject.getVideoTracks()[0];
- 
-  console.info("Track settings:");
-  console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
-  console.info("Track constraints:");
-  console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
-}
