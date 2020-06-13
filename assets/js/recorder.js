@@ -98,6 +98,7 @@ function stopCapture(evt) {
   videoElem.src = recordingWEBM;
 
   var iChunkCount = 1;
+  videoChunks.innerHTML = "";
   chunkRecordings.forEach(
     function(chunkRecording){
       console.log(chunkRecording);
