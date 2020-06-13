@@ -117,7 +117,16 @@ function stopCapture(evt) {
   var videoChunkElem = document.createElement("video");
   videoChunkElem.setAttribute("controls", "true");
   videoChunkElem.classList.add("chunkResult");
-  var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecordingsRaw, {type: 'video/webm'}));
+
+  var removed = chunkRecordingsRaw.splice(2,2);
+  var newChunks = [];
+  removed.forEach(
+    function(chunkRecording){
+        newChunks.push(new Blob(chunkRecording, {type: 'video/webm'}));
+    }
+  );
+
+  var videoChunkBlob = window.URL.createObjectURL(new Blob(newChunks, {type: 'video/webm'}));
   videoChunkElem.src = videoChunkBlob;
  // window.URL.revokeObjectURL(videoChunkBlob);
   videoChunks.appendChild(videoChunkElem);
