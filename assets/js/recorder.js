@@ -1,5 +1,16 @@
-const videoElem = document.getElementById("video");
-const buttonElem = document.getElementById("button");
+/**
+ * Main File for the Screenrecording
+ */
+
+// Define Element Constants
+const videoElem   = document.getElementById("video");
+const buttonElem  = document.getElementById("button");
+const loaderElem  = document.getElementById("loader");
+const chunksElem  = document.getElementById("videoChunks");
+const chunksHElem = document.getElementById("videoChunksHeading");
+const mp4DowElem  = document.getElementById("resultLinkMP4");
+const webmDowElem = document.getElementById("resultLinkWEBM");
+
 var chunks = [];
 var running = false;
 var chunkRecordings = [];
@@ -10,7 +21,7 @@ var int = null;
 // Options for getDisplayMedia()
 
 window.onload = function(){
-  document.getElementById("loader").style.display = "none";
+  loaderElem.style.display = "none";
 };
 
 var displayMediaOptions = {
@@ -33,7 +44,7 @@ buttonElem.addEventListener("click", function(evt) {
 async function startCapture() {
 
     videoElem.srcObject = null;
-    let videoChunks = document.getElementById("videoChunks");
+    let videoChunks = chunksElem;
     videoChunks.innerHTML = "";
     videoElem.src = "";
     chunkRecordings = [];
@@ -47,9 +58,9 @@ async function startCapture() {
       window.URL.revokeObjectURL(recordingWEBM);
     }
   buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
-  document.getElementById("resultLinkMP4").style.display = "none";
-  document.getElementById("resultLinkWEBM").style.display = "none";
-  document.getElementById("videoChunksHeading").style.display = "none";
+  mp4DowElem.style.display = "none";
+  webmDowElem.style.display = "none";
+  chunksHElem.style.display = "none";
 
   try {
     var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
@@ -105,23 +116,23 @@ async function startCapture() {
 } 
 
 function stopCapture(evt) {
-  document.getElementById("loader").style.display = "block";
+  loaderElem.style.display = "block";
   clearInterval(int);
   let tracks = videoElem.srcObject.getTracks();
-  let videoChunks = document.getElementById("videoChunks");
+  let videoChunks = chunksElem;
   tracks.forEach(track => track.stop());
   
   recordingMP4 = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
   recordingWEBM = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
   running = false;
   buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
-  document.getElementById("resultLinkMP4").addEventListener('progress', e => console.log(e));
-  document.getElementById("resultLinkMP4").href = recordingMP4;
-  document.getElementById("resultLinkMP4").style.display = "inline-block";
-  document.getElementById("resultLinkWEBM").addEventListener('progress', e => console.log(e));
-  document.getElementById("resultLinkWEBM").href = recordingWEBM;
-  document.getElementById("resultLinkWEBM").style.display = "inline-block";
-  document.getElementById("videoChunksHeading").style.display = "inline-block";
+  mp4DowElem.addEventListener('progress', e => console.log(e));
+  mp4DowElem.href = recordingMP4;
+  mp4DowElem.style.display = "inline-block";
+  webmDowElem.addEventListener('progress', e => console.log(e));
+  webmDowElem.href = recordingWEBM;
+  webmDowElem.style.display = "inline-block";
+  chunksHElem.style.display = "inline-block";
 
   
 
@@ -173,7 +184,7 @@ function stopCapture(evt) {
 
   var newvideoChunkBlob = window.URL.createObjectURL(new Blob(newChunks, {type: 'video/webm'}));
   videoChunkElem.src = newvideoChunkBlob;
-  document.getElementById("loader").style.display = "none";
+  loaderElem.style.display = "none";
  // window.URL.revokeObjectURL(videoChunkBlob);
   //videoChunks.appendChild(videoChunkElem);
   //videoElem.play();
