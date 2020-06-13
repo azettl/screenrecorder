@@ -36,8 +36,7 @@
         "click", 
         (event) => {
             if(isRecordingRunning){
-                videoElem.srcObject    = null;
-                videoElem.src          = "";
+                videoElem.dispatchEvent(new Event(inactive));
             }else{
                 startCapture();
             }
