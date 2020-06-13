@@ -138,7 +138,7 @@
 /* END:: Scrollbar */
 
 /* START:: Loading Spinner and Loading Animation */
-    #loader {
+    #loader::before {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -151,6 +151,10 @@
         border-top: 16px solid var(--button-color);
         -webkit-animation: spin 2s linear infinite;
         animation: spin 2s linear infinite;
+    }
+
+    #loader{
+        
     }
 
     @-webkit-keyframes spin {
