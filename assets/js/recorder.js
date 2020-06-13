@@ -36,7 +36,7 @@
         "click", 
         (event) => {
             if(isRecordingRunning){
-                videoElem.dispatchEvent(new Event(inactive));
+                videoElem.dispatchEvent(new Event("inactive"));
             }else{
                 startCapture();
             }
