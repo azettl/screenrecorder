@@ -74,3 +74,7 @@ button, .button{
     border-radius: .25rem;
 }
   /* Scrollbar End */
+
+footer{
+    margin:2rem 0;
+}
