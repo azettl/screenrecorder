@@ -84,7 +84,7 @@
     }
 
     .chunk .button{
-        width:12rem;
+        width:calc(100% - 4px - 4rem);
         margin-top:1rem;
     }
 /* END:: Single Chunk */

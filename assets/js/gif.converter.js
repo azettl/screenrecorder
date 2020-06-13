@@ -5,61 +5,91 @@
 function downloadGIF(sOrgVideoElem){
     orgVideoElem = document.getElementById(sOrgVideoElem);
 
-    var saveData = (function () {
-        var a = document.createElement("a");
-        a.style = "display: none";
-        document.body.appendChild(a);
-        return function (url, fileName) {
-            a.href = url;
-            a.download = fileName;
-            a.click();
-            window.URL.revokeObjectURL(url);
+    // This Function creates a new A Element, adds the GIF file as HREF and clicks to download the GIF.
+        var saveData = (function () {
+            var a = document.createElement("a");
+            a.style = "display: none";
+            document.body.appendChild(a);
+            return function (url, fileName) {
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            };
+        }());
+    
+    // Define Variables
+        var capture, gif, sampleInterval, timer;
+
+    // Create GIF instance and assign original video height and width
+        gif = new GIF({
+            workers: 4,
+            workerScript: 'assets/js/gif.worker.js',
+            width: orgVideoElem.videoWidth,
+            height: orgVideoElem.videoHeight
+        });
+
+    // Set GIF Interval to 500ms
+        sampleInterval = 500;
+    
+    // Show Loader 
+        loaderElem.style.display = "block";
+
+    // Pause the Video, set currentTime back to 0 and disable the controls
+        orgVideoElem.pause();
+        orgVideoElem.currentTime = 0;
+        orgVideoElem.controls    = false;
+
+    // Reset GIF Instance and Empty the Frames
+        gif.abort();
+        gif.frames = [];
+
+    // Play the Video for GIF Recording
+        orgVideoElem.play();
+
+    // Once the GIF Generation is Finished, download the GIF, hide the Loader and Enable the Controls
+        gif.on(
+            'finished', 
+            function(blob) {
+                saveData(URL.createObjectURL(blob), "screenrecording.gif");
+                
+                loaderElem.style.display = "none";
+                orgVideoElem.controls    = true;
+            }
+        );
+
+    // Reset timer for Interval
+        timer = null;
+
+    // Main Function to Capture the Video as GIF, this is adding the single Frames to the GIF
+        capture = function() {
+            gif.addFrame(
+                orgVideoElem, 
+                {
+                    copy: true,
+                    delay: sampleInterval
+                }
+            );
         };
-    }());
-    
-console.log(orgVideoElem.videoWidth);
-var capture, gif, sampleInterval, startTime, timer;
-gif = new GIF({
-workers: 4,
-workerScript: 'assets/js/gif.worker.js',
-width: orgVideoElem.videoWidth,
-height: orgVideoElem.videoHeight
-});
-startTime = null;
-sampleInterval = 500;
-    
-    loaderElem.style.display = "block";
-orgVideoElem.pause();
-orgVideoElem.currentTime = 0;
-orgVideoElem.controls = false;
-gif.abort();
-gif.frames = [];
-orgVideoElem.play();
-gif.on('start', function() {
-return startTime = now();
-});
-gif.on('progress', function(p) {
-});
-gif.on('finished', function(blob) {
-saveData(URL.createObjectURL(blob), "screenrecording.gif");
-loaderElem.style.display = "none";
-orgVideoElem.controls = true;
-});
-timer = null;
-capture = function() {
-return gif.addFrame(orgVideoElem, {
-  copy: true,
-  delay: sampleInterval
-});
-};
-orgVideoElem.addEventListener('play', function() {
-clearInterval(timer);
-return timer = setInterval(capture, sampleInterval);
-});
-orgVideoElem.addEventListener('ended', function() {
-clearInterval(timer);
-return gif.render();
-});
+
+    // While the video is playing capture the Frames for the GIF
+        orgVideoElem.addEventListener(
+            'play', 
+            function() {
+                clearInterval(timer);
+                timer = setInterval(capture, sampleInterval);
+                
+            }
+        );
+
+    // Once the Video ended, render the GIF
+        orgVideoElem.addEventListener(
+            'ended', 
+            function() {
+                clearInterval(timer);
+                gif.render();
+            }
+        );
 }
   
   
