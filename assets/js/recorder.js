@@ -376,6 +376,7 @@ console.log(videoElem.videoWidth);
     var delta, img;
     img = document.createElement('img');
     img.src = URL.createObjectURL(blob);
+    window.open(img.src);
     document.body.appendChild(img);
     delta = now() - startTime;
   });
