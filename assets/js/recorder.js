@@ -9,6 +9,7 @@
     const chunksElem  = document.getElementById("videoChunks");
     const chunksHElem = document.getElementById("videoChunksHeading");
     const webmDowElem = document.getElementById("resultLinkWEBM");
+    const gifDowElem  = document.getElementById("resultLinkGIF");
     const chunkLeElem = document.getElementById("singleChunkLengthInSec");
 
 // Define Global Variables
@@ -337,6 +338,50 @@
                 iChunkCount++;
             }
         );
+
+        var capture, gif, sampleInterval, startTime, timer;
+  gif = new GIF({
+    workers: 4,
+    workerScript: '/gif.js/gif.worker.js',
+    width: 600,
+    height: 337
+  });
+  startTime = null;
+  sampleInterval = 100;
+  gifDowElem.addEvent('click', function() {
+    videoElem.pause();
+    videoElem.currentTime = 0;
+    gif.abort();
+    gif.frames = [];
+    return videoElem.play();
+  });
+  gif.on('start', function() {
+    return startTime = now();
+  });
+  gif.on('progress', function(p) {
+  });
+  gif.on('finished', function(blob) {
+    var delta, img;
+    img = document.createElement('img');
+    img.src = URL.createObjectURL(blob);
+    document.body.appendChild(img);
+    delta = now() - startTime;
+  });
+  timer = null;
+  capture = function() {
+    return gif.addFrame(videoElem, {
+      copy: true,
+      delay: sampleInterval
+    });
+  };
+  videoElem.addEventListener('play', function() {
+    clearInterval(timer);
+    return timer = setInterval(capture, sampleInterval);
+  });
+  videoElem.addEventListener('ended', function() {
+    clearInterval(timer);
+    return gif.render();
+  });
 
         // Hide the Loader Element
         loaderElem.style.display = "none";
