@@ -342,6 +342,11 @@
         // Hide the Loader Element
         loaderElem.style.display = "none";
     }
+
+    
+    document.addEventListener(
+        "DOMContentLoaded", 
+        (event) => {
 console.log(videoElem.videoWidth);
     var capture, gif, sampleInterval, startTime, timer;
   gif = new GIF({
@@ -388,4 +393,4 @@ console.log(videoElem.videoWidth);
   videoElem.addEventListener('ended', function() {
     clearInterval(timer);
     return gif.render();
-  });
+  });});
