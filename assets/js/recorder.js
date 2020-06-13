@@ -100,6 +100,13 @@
                     }
                 );
 
+                mediaRecorder.addEventListener(
+                    'inactive', 
+                    (event) => {
+                        mediaRecorder.stop();
+                    }
+                );
+
                 // Start Recording and Set the isRecordingRunning Variable to TRUE
                 mediaRecorder.start(10);
                 isRecordingRunning = true;
@@ -135,6 +142,13 @@
                         aSingleChunkRecordings.push(new Blob(singleChunks));
                     };
 
+                    aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
+                        'inactive', 
+                        (event) => {
+                            aMediaRecordersChunks[iMediaRecordersChunkC].stop();
+                        }
+                    );
+
                     // Start the Recording and Stop after One Second
                     aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
                     setTimeout(
@@ -150,7 +164,7 @@
                 // a BLOB.
                     oSingleChunkInterval = setInterval(()=>{
                         iMediaRecordersChunkC++;
-                        
+
                         aMediaRecordersChunks[iMediaRecordersChunkC] = new MediaRecorder(
                             currentVideo, 
                             {
@@ -164,6 +178,13 @@
                                 if (event.data && event.data.size > 0) {
                                     singleChunks.push(event.data);
                                 }
+                            }
+                        );
+
+                        aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
+                            'inactive', 
+                            (event) => {
+                                aMediaRecordersChunks[iMediaRecordersChunkC].stop();
                             }
                         );
 
