@@ -342,7 +342,7 @@
         // Hide the Loader Element
         loaderElem.style.display = "none";
     }
-
+console.log(videoElem.videoWidth);
     var capture, gif, sampleInterval, startTime, timer;
   gif = new GIF({
     workers: 4,
