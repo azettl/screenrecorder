@@ -29,6 +29,11 @@ video.chunk{
     margin-right:2rem;
 }
 
+.videoChunks{
+    display: flex;
+    overflow-x: auto
+}
+
 #resultLinkMP4,
 #resultLinkWEBM{
     display: none;
