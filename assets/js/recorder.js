@@ -8,14 +8,12 @@ const buttonElem  = document.getElementById("button");
 const loaderElem  = document.getElementById("loader");
 const chunksElem  = document.getElementById("videoChunks");
 const chunksHElem = document.getElementById("videoChunksHeading");
-const mp4DowElem  = document.getElementById("resultLinkMP4");
 const webmDowElem = document.getElementById("resultLinkWEBM");
 
 var chunks = [];
 var running = false;
 var chunkRecordings = [];
 var chunkRecordingsRaw = [];
-var recordingMP4 = null;
 var recordingWEBM = null;
 var int = null;
 // Options for getDisplayMedia()
@@ -51,14 +49,10 @@ async function startCapture() {
     chunkRecordingsRaw = [];
     chunks = [];
 
-    if (recordingMP4) {
-      window.URL.revokeObjectURL(recordingMP4);
-    }
     if (recordingWEBM) {
       window.URL.revokeObjectURL(recordingWEBM);
     }
   buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
-  mp4DowElem.style.display = "none";
   webmDowElem.style.display = "none";
   chunksHElem.style.display = "none";
 
@@ -122,13 +116,9 @@ function stopCapture(evt) {
   let videoChunks = chunksElem;
   tracks.forEach(track => track.stop());
   
-  recordingMP4 = window.URL.createObjectURL(new Blob(chunks, {type: 'video/mp4'}));
   recordingWEBM = window.URL.createObjectURL(new Blob(chunks, {type: 'video/webm'}));
   running = false;
   buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
-  mp4DowElem.addEventListener('progress', e => console.log(e));
-  mp4DowElem.href = recordingMP4;
-  mp4DowElem.style.display = "inline-block";
   webmDowElem.addEventListener('progress', e => console.log(e));
   webmDowElem.href = recordingWEBM;
   webmDowElem.style.display = "inline-block";
