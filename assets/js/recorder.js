@@ -9,6 +9,10 @@ var recordingWEBM = null;
 var int = null;
 // Options for getDisplayMedia()
 
+window.onload = function(){
+  document.getElementById("loader").style.display = "none";
+};
+
 var displayMediaOptions = {
   video: {
     cursor: "always"

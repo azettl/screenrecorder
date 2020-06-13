@@ -121,7 +121,6 @@ footer{
     border-top: 16px solid #6ac2b6;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
-    display:none;
   }
   
   @-webkit-keyframes spin {
