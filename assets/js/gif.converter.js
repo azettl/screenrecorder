@@ -4,7 +4,7 @@
   
 function downloadGIF(sOrgVideoElem){
     orgVideoElem = document.getElementById(sOrgVideoElem);
-    
+
     var saveData = (function () {
         var a = document.createElement("a");
         a.style = "display: none";
@@ -17,9 +17,6 @@ function downloadGIF(sOrgVideoElem){
         };
     }());
     
-    orgVideoElem.addEventListener(
-    "loadeddata", 
-    (event) => {
 console.log(orgVideoElem.videoWidth);
 var capture, gif, sampleInterval, startTime, timer;
 gif = new GIF({
@@ -65,7 +62,7 @@ return timer = setInterval(capture, sampleInterval);
 orgVideoElem.addEventListener('ended', function() {
 clearInterval(timer);
 return gif.render();
-});});
+});
 }
   
   
