@@ -39,7 +39,7 @@ video {
 }
 
 .chunk .button{
-    width:calc(100% - 4px);
+    width:calc(100% - 4px - 2rem);
     margin-top:1rem;
 }
 
