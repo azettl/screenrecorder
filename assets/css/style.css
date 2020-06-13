@@ -6,9 +6,13 @@
 }
 
 /* START:: General */
+    html{
+        display: table;
+    }
     html,
     body{
         height:100%;
+        width:100%;
         margin:0;
         padding:0
     }
@@ -17,6 +21,8 @@
         font-size:16px;
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
         background: antiquewhite;
+        display: table-cell;
+        position: relative;
     }
 
     #wrapper{
@@ -34,7 +40,7 @@
     }
 
     header, article, footer {
-    padding: 0 2rem;
+        padding: 0 2rem;
     }
 /* END:: General */
 
@@ -157,7 +163,12 @@
     }
 
     #loader{
-
+        background: hsla(0, 0%, 0%,.2);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     @-webkit-keyframes spin {
