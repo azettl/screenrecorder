@@ -118,7 +118,7 @@ function stopCapture(evt) {
   videoChunkElem.setAttribute("controls", "true");
   videoChunkElem.classList.add("chunkResult");
 
-  var removed = chunkRecordingsRaw.splice(2,2);
+  var removed = chunkRecordingsRaw;
   var newChunks = [];
   removed.forEach(
     function(chunkRecording){
