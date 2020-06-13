@@ -334,21 +334,22 @@
 
                 chunksElem.appendChild(videoChunkDivElem);
 
-
-                gifshot.createGIF({
-                    'video': [videoChunkElem]
-                  },function(obj) {
-                    if(!obj.error) {
-                      var image = obj.image,
-                      animatedImage = document.createElement('img');
-                      animatedImage.src = image;
-                      chunksElem.appendChild(animatedImage);
-                    }
-                  });
-
                 iChunkCount++;
             }
         );
+
+        
+
+        gifshot.createGIF({
+            'video': document.querySelectorAll("#videoChunks > video")
+          },function(obj) {
+            if(!obj.error) {
+              var image = obj.image,
+              animatedImage = document.createElement('img');
+              animatedImage.src = image;
+              document.body.appendChild(animatedImage);
+            }
+          });
 
         // Hide the Loader Element
         loaderElem.style.display = "none";
