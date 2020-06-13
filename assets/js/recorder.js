@@ -218,7 +218,9 @@
             buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
 
         // Change Chunk Header
-            var sSpelledNumber = "";
+            var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
+            var sSpelledNumber         = "";
+            
             switch (iSingleChunkLengthInMS){
                 case 1000:
                     sSpelledNumber = "One";
