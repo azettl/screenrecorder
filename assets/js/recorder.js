@@ -51,12 +51,18 @@ async function startCapture() {
     });
 
     var singleChunks = [];
-    setInterval(()=>{
-        const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
+    let int = setInterval(()=>{
+        const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
         mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
         mediaRecorderCunk.onstop = e => chunkRecordings.push(new Blob(singleChunks));
-        mediaRecorderCunk.start();
-        setTimeout(()=>mediaRecorderCunk.stop(), 1000);
+        mediaRecorderCunk.start(10);
+        setTimeout(
+            function(){
+                clearInterval(int);
+                mediaRecorderCunk.stop()
+            }, 
+            1000
+        );
     }, 1000);
 
     mediaRecorder.start(10);
