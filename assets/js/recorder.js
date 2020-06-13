@@ -150,7 +150,7 @@
                     );
 
                     // Start the Recording and Stop after One Second
-                    aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
+                    aMediaRecordersChunks[iMediaRecordersChunkC].start(iSingleChunkLengthInMS);
                     setTimeout(
                         function(){
                             if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
@@ -195,7 +195,7 @@
                         };
                         
                         // Start the Recording and Stop after One Second
-                        aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
+                        aMediaRecordersChunks[iMediaRecordersChunkC].start(iSingleChunkLengthInMS);
                         setTimeout(
                             function(){
                                 if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
