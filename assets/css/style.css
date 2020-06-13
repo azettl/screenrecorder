@@ -79,7 +79,7 @@
 
     .chunk video{
         width:calc(100% - 4px);
-        min-width: 160px;
+        min-width: 240px;
         display: block;
     }
 
