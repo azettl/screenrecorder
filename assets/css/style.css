@@ -151,10 +151,7 @@ input[type="range"]{
     -webkit-appearance: none;
     border-radius: .25rem;
     border: 2px solid var(--text-color);
-}
-
-input[type="range"]::-webkit-slider-runnable-track,
-input[type="range"]::-moz-range-thumb {
+    margin:0;
     background: transparent;
 }
 /* END:: Range Input */
