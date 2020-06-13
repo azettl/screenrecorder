@@ -41,35 +41,43 @@
     );
 
 // Definition of the async startCapture function
+    async function startCapture() {
+        // Clear Data from the Previous Recording
+            videoElem.srcObject    = null;
+            videoElem.src          = "";
+            chunksElem.innerHTML   = "";
+            aSingleChunkRecordings = [];
+            aFullChunkRecordings   = [];
 
+            if (oFullObjectURL) {
+                window.URL.revokeObjectURL(oFullObjectURL);
+            }
 
+        // Change Button Text to "Stop Capture" and Hide the Download Button + One Second Chunks Section
+            buttonElem.innerHTML      = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
+            webmDowElem.style.display = "none";
+            chunksHElem.style.display = "none";
 
-async function startCapture() {
+        // Try to Record the Screen
+        try {
+            // Get the Current Screen and assign it to the Video Elements Source Object 
+            // and the currentVideo Constant. Stop the Recording when the User Stops Sharing his Screen
+            // via the "inactive" Event.
+            const currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
+                {
+                    video: {
+                        cursor: "always"
+                    },
+                    audio: true
+                }
+            );
 
-    videoElem.srcObject = null;
-    let videoChunks = chunksElem;
-    videoChunks.innerHTML = "";
-    videoElem.src = "";
-    aSingleChunkRecordings = [];
-    aFullChunkRecordings = [];
-
-    if (oFullObjectURL) {
-      window.URL.revokeObjectURL(oFullObjectURL);
-    }
-  buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
-  webmDowElem.style.display = "none";
-  chunksHElem.style.display = "none";
-
-  try {
-    var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia({
-        video: {
-          cursor: "always"
-        },
-        audio: true
-      });
-    currentVideo.addEventListener('inactive', e => {
-      stopCapture(e);
-    });
+            currentVideo.addEventListener(
+                'inactive', 
+                (event) => {
+                    stopCapture(event);
+                }
+            );
 
     const mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
     mediaRecorder.addEventListener('dataavailable', event => {
@@ -119,7 +127,6 @@ function stopCapture(evt) {
   loaderElem.style.display = "block";
   clearInterval(oSingleChunkInterval);
   let tracks = videoElem.srcObject.getTracks();
-  let videoChunks = chunksElem;
   tracks.forEach(track => track.stop());
   
   oFullObjectURL = window.URL.createObjectURL(new Blob(aFullChunkRecordings, {type: 'video/webm'}));
@@ -160,7 +167,7 @@ function stopCapture(evt) {
       videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
       videoChunkDivElem.appendChild(videoChunkAElem);
 
-      videoChunks.appendChild(videoChunkDivElem);
+      chunksElem.appendChild(videoChunkDivElem);
       iChunkCount++;
     }
   );
