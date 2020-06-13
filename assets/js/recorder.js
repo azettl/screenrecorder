@@ -55,7 +55,7 @@ async function startCapture() {
     int = setInterval(()=>{
         const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
         mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
-        mediaRecorderCunk.onstop = e => chunkRecordings.push(new Blob(singleChunks));
+        mediaRecorderCunk.onstop = e => chunkRecordings.push(singleChunks);
         mediaRecorderCunk.start(10);
         setTimeout(
             function(){
@@ -101,7 +101,7 @@ function stopCapture(evt) {
       videoChunkElem.setAttribute("controls", "true");
       videoChunkElem.classList.add("chunk");
 
-      var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
+      var videoChunkBlob = window.URL.createObjectURL(new Blob(chunkRecording, {type: 'video/mp4'}));
       videoChunkElem.src = videoChunkBlob;
 
       videoChunks.appendChild(videoChunkElem);
