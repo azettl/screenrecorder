@@ -27,18 +27,14 @@ height: orgVideoElem.videoHeight
 });
 startTime = null;
 sampleInterval = 500;
-gifDowElem.addEventListener(
-'click', 
-(event) => {
     
     loaderElem.style.display = "block";
 orgVideoElem.pause();
 orgVideoElem.currentTime = 0;
+orgVideoElem.controls = false;
 gif.abort();
 gif.frames = [];
 orgVideoElem.play();
-}
-);
 gif.on('start', function() {
 return startTime = now();
 });
@@ -47,6 +43,7 @@ gif.on('progress', function(p) {
 gif.on('finished', function(blob) {
 saveData(URL.createObjectURL(blob), "screenrecording.gif");
 loaderElem.style.display = "none";
+orgVideoElem.controls = true;
 });
 timer = null;
 capture = function() {
