@@ -116,7 +116,7 @@ function stopCapture(evt) {
       videoChunkElem.src = videoChunkBlob;
       videoChunkDivElem.appendChild(videoChunkElem);
 
-      var videoChunkAElem = document.createElement("h3");
+      var videoChunkAElem = document.createElement("a");
       videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
       videoChunkAElem.classList.add("button");
       videoChunkAElem.href = videoChunkBlob;
