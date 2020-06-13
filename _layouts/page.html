@@ -27,9 +27,6 @@
                 <button id="button">
                     <i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture
                 </button>
-                <a href="#" id="resultLinkWEBM" class="button" download="screenrecording.webm">
-                    <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM
-                </a>
                 <label for="singleChunkLengthInSec">Single Chunk Length in Seconds</label>
                 <input type="range" id="singleChunkLengthInSec" value="5" min="1" max="15" list="tickmarks">
                 <datalist id="tickmarks">
@@ -49,6 +46,9 @@
                     <option value="14" label="14"></option>
                     <option value="15" label="15"></option>
                 </datalist>
+                <a href="#" id="resultLinkWEBM" class="button" download="screenrecording.webm">
+                    <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM
+                </a>
             </p>
 
             <video id="video" controlsList="nodownload" autoplay controls loop src="assets/sample.mp4"></video>
