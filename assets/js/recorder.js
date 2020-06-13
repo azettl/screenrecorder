@@ -345,7 +345,7 @@
 
     
     videoElem.addEventListener(
-        "ready", 
+        "loadeddata", 
         (event) => {
 console.log(videoElem.videoWidth);
     var capture, gif, sampleInterval, startTime, timer;
