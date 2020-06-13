@@ -346,7 +346,7 @@
     var capture, gif, sampleInterval, startTime, timer;
   gif = new GIF({
     workers: 4,
-    workerScript: '/gif.js/gif.worker.js',
+    workerScript: 'assets/js/gif.worker.js',
     width: 600,
     height: 337
   });
