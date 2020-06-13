@@ -88,6 +88,7 @@ function downloadGIF(sOrgVideoElem){
             function() {
                 clearInterval(timer);
                 gif.render();
+                this.removeEventListener('ended',arguments.callee,false);
             }
         );
 }
