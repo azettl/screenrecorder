@@ -234,6 +234,7 @@
 
                 var videoChunkElem = document.createElement("video");
                 videoChunkElem.setAttribute("controls", "true");
+                videoChunkElem.setAttribute("controlsList", "nodownload");
 
                 var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
                 videoChunkElem.src = videoChunkBlob;
