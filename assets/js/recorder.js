@@ -104,6 +104,8 @@
 
                 // Define the MediaRecorders for the Single One Second Chunks
                 var singleChunks = [];
+                var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
+                console.log(iSingleChunkLengthInMS);
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -135,7 +137,7 @@
                         function(){
                             mediaRecorderCunk.stop()
                         }, 
-                        (chunkLeElem.value * 1000)
+                        iSingleChunkLengthInMS
                     );
 
                 // The Other Chunks are handled Inside the Interval and Push the Data to the 
@@ -164,16 +166,15 @@
                         };
                         
                         // Start the Recording and Stop after One Second
-                        console.log((chunkLeElem.value * 1000));
                         mediaRecorderCunk.start(10);
                         setTimeout(
                             function(){
                                 mediaRecorderCunk.stop()
                             }, 
-                            (chunkLeElem.value * 1000)
+                            iSingleChunkLengthInMS
                         );
                     }, 
-                    (chunkLeElem.value * 1000)
+                    iSingleChunkLengthInMS
                 );
         } catch(err) {
             console.error("Error: " + err);
