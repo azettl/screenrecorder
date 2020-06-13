@@ -166,6 +166,7 @@ input[type=range]::-ms-thumb{
     border-radius: .25rem;
     border: 2px solid var(--text-color);
     cursor: pointer;
+    margin-top: -14px;
 }
 
 datalist{
