@@ -140,6 +140,7 @@
 /* START:: Loading Spinner and Loading Animation */
     #loader::before {
         position: absolute;
+        content:"";
         left: 50%;
         top: 50%;
         z-index: 1;
@@ -154,7 +155,7 @@
     }
 
     #loader{
-        
+
     }
 
     @-webkit-keyframes spin {
