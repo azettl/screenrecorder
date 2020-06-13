@@ -348,13 +348,16 @@
   });
   startTime = null;
   sampleInterval = 100;
-  gifDowElem.addEvent('click', function() {
+  gifDowElem.addEventListener(
+    'click', 
+    (event) => {
     videoElem.pause();
     videoElem.currentTime = 0;
     gif.abort();
     gif.frames = [];
-    return videoElem.play();
-  });
+    videoElem.play();
+    }
+    );
   gif.on('start', function() {
     return startTime = now();
   });
