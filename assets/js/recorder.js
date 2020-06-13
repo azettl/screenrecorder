@@ -101,6 +101,7 @@ async function startCapture() {
 } 
 
 function stopCapture(evt) {
+  document.getElementById("loader").style.display = "block";
   clearInterval(int);
   let tracks = videoElem.srcObject.getTracks();
   let videoChunks = document.getElementById("videoChunks");
@@ -127,11 +128,9 @@ function stopCapture(evt) {
   var iChunkCount = 1;
   chunkRecordings.forEach(
     function(chunkRecording){
-      console.log(chunkRecording);
       var videoChunkDivElem = document.createElement("div");
       videoChunkDivElem.classList.add("chunk");
 
-      
       var videoChunkHeadElem = document.createElement("h3");
       videoChunkHeadElem.innerText = "Chunk #" + iChunkCount;
       videoChunkDivElem.appendChild(videoChunkHeadElem);
@@ -173,6 +172,7 @@ function stopCapture(evt) {
  // window.URL.revokeObjectURL(videoChunkBlob);
   //videoChunks.appendChild(videoChunkElem);
   //videoElem.play();
+  document.getElementById("loader").style.display = "none";
 } 
 
 function dumpOptionsInfo() {
