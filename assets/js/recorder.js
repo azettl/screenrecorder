@@ -66,7 +66,7 @@ function stopCapture(evt) {
         var videoChunkElem = document.createElement("video");
         videoChunkElem.setAttribute("controls", "true");
 
-        var videoChunkBlob = window.URL.createObjectURL(new Blob(chunk, {type: 'video/webm'}));
+        var videoChunkBlob = window.URL.createObjectURL(chunk);
         videoChunkElem.src = videoChunkBlob;
 
         videoChunks.appendChild(videoChunkElem);
