@@ -339,6 +339,7 @@
                 videoChunkAGIFElem.classList.add("button");
                 videoChunkAGIFElem.classList.add("downloadgif");
                 videoChunkAGIFElem.dataset.videoelement = "video" + iChunkCount;
+                videoChunkAGIFElem.setAttribute("onclick", "downloadGIF(this.dataset.videoelement)");
                 videoChunkDivElem.appendChild(videoChunkAGIFElem);
 
                 chunksElem.appendChild(videoChunkDivElem);
