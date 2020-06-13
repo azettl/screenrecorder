@@ -114,15 +114,15 @@ function stopCapture(evt) {
 
       var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
       videoChunkElem.src = videoChunkBlob;
+      videoChunkDivElem.appendChild(videoChunkElem);
 
       var videoChunkAElem = document.createElement("h3");
       videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
       videoChunkAElem.classList.add("button");
       videoChunkAElem.href = videoChunkBlob;
       videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
-      videoChunkAElem.appendChild(videoChunkAElem);
+      videoChunkDivElem.appendChild(videoChunkAElem);
 
-      videoChunkDivElem.appendChild(videoChunkElem);
       videoChunks.appendChild(videoChunkDivElem);
       iChunkCount++;
     }
