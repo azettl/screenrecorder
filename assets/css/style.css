@@ -153,38 +153,19 @@ input[type="range"]{
     border: 2px solid var(--text-color);
     margin:0;
     background: transparent;
+    outline: 0;
 }
 
-/* Special styling for WebKit/Blink */
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb,
+input[type=range]::-ms-thumb {
     background-color: var(--button-color);
     height:2rem;
     width:2rem;
     border-radius: .25rem;
     border: 2px solid var(--text-color);
     cursor: pointer;
-  }
-  
-  /* All the same stuff for Firefox */
-  input[type=range]::-moz-range-thumb {
-    background-color: var(--button-color);
-    height:2rem;
-    width:2rem;
-    border-radius: .25rem;
-    border: 2px solid var(--text-color);
-    cursor: pointer;
-  }
-  
-  /* All the same stuff for IE */
-  input[type=range]::-ms-thumb {
-    background-color: var(--button-color);
-    height:2rem;
-    width:2rem;
-    border-radius: .25rem;
-    border: 2px solid var(--text-color);
-    cursor: pointer;
-  }
+}
 
 datalist{
     display: flex;
