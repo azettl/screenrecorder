@@ -60,6 +60,21 @@ async function startCapture() {
     });
 
     var singleChunks = [];
+    // First Chunk
+    const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
+    mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
+    mediaRecorderCunk.onstop = function(e){
+        chunkRecordings.push(new Blob(singleChunks));
+        chunkRecordingsRaw.push(singleChunks);
+    };
+    mediaRecorderCunk.start(10);
+    setTimeout(
+        function(){
+            mediaRecorderCunk.stop()
+        }, 
+        1000
+    );
+    // Other Chunks
     int = setInterval(()=>{
         const mediaRecorderCunk = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});    
         mediaRecorderCunk.ondataavailable = e => singleChunks.push(e.data);
