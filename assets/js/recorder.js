@@ -145,7 +145,7 @@
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
                     oSingleChunkInterval = setInterval(()=>{
-                        const mediaRecorderCunk = new MediaRecorder(
+                        var mediaRecorderCunk = new MediaRecorder(
                             currentVideo, 
                             {
                                 mimeType: 'video/webm'
