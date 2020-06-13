@@ -45,6 +45,7 @@ max-width: 720px;
     -webkit-overflow-scrolling: touch;
 }
 
+#videoChunksHeading,
 #resultLinkMP4,
 #resultLinkWEBM{
     display: none;

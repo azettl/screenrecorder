@@ -45,6 +45,7 @@ async function startCapture() {
   buttonElem.innerHTML = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
   document.getElementById("resultLinkMP4").style.display = "none";
   document.getElementById("resultLinkWEBM").style.display = "none";
+  document.getElementById("videoChunksHeading").style.display = "none";
 
   try {
     var currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
@@ -115,6 +116,9 @@ function stopCapture(evt) {
   document.getElementById("resultLinkWEBM").addEventListener('progress', e => console.log(e));
   document.getElementById("resultLinkWEBM").href = recordingWEBM;
   document.getElementById("resultLinkWEBM").style.display = "inline-block";
+  document.getElementById("videoChunksHeading").style.display = "inline-block";
+
+  
 
   videoElem.srcObject = null;
   videoElem.src = recordingWEBM;
