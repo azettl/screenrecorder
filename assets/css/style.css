@@ -29,7 +29,7 @@ video {
 .chunk{
     display: inline-block;
     margin:0 2rem 2rem 0;
-    width:12rem;
+    width:14rem;
 }
 
 .chunk video{
@@ -39,7 +39,7 @@ video {
 }
 
 .chunk .button{
-    width:calc(100% - 4px - 2rem);
+    width:calc(100% - 4px - 4rem);
     margin-top:1rem;
 }
 
