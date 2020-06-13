@@ -276,8 +276,10 @@
             loaderElem.style.display = "block";
 
         // Stop all the Tracks on the Video Elements Source Object
-            let tracks = videoElem.srcObject.getTracks();
-            tracks.forEach(track => track.stop());
+            if(videoElem.srcObject){
+                let tracks = videoElem.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+            }
 
         // Clear the Interval for the Single Chunk Recording
             clearInterval(oSingleChunkInterval);
