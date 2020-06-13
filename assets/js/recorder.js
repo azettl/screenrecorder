@@ -42,7 +42,7 @@ async function startCapture() {
       stopCapture(e);
     });
 
-    mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/webm'});
+    mediaRecorder = new MediaRecorder(currentVideo, {mimeType: 'video/mp4'});
     mediaRecorder.addEventListener('dataavailable', event => {
       if (event.data && event.data.size > 0) {
         chunks.push(event.data);
