@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: screenrecorder.online
-Token: c3a44ef722179c2c24d9b0830d43ef5bf09a2f805832446a600e03f216d809b8
