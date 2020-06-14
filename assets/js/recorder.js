@@ -332,6 +332,7 @@
         console.log(aSingleChunkRecordings);
         aSingleChunkRecordings.forEach(
             function(chunkRecording){
+                console.log(chunkRecording);
                 var videoChunkDivElem = document.createElement("div");
                 videoChunkDivElem.classList.add("chunk");
 
