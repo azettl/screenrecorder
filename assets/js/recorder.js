@@ -169,6 +169,7 @@
                 // a BLOB.
                     oSingleChunkInterval = setInterval(()=>{
                         iMediaRecordersChunkC++;
+                        console.log(iMediaRecordersChunkC);
                         if(!aMediaRecorderSingleCh[iMediaRecordersChunkC]){
                             aMediaRecorderSingleCh[iMediaRecordersChunkC] = [];
                         }
