@@ -176,6 +176,7 @@
                                 mimeType: 'video/webm'
                             }
                         );
+                        console.log(id);
                         oTempMediaRecorder.id = id;
                         id++;
 
