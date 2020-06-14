@@ -330,6 +330,7 @@
         var iChunkCount = 1;
 
         console.log(aSingleChunkRecordings);
+        console.log(aSingleChunkRecordings.length);
         aSingleChunkRecordings.forEach(
             function(chunkRecording){
                 console.log(chunkRecording);
