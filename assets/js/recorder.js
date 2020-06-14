@@ -219,6 +219,10 @@
                     (parseInt(chunkLeElem.value) * 1000)
                 );
         } catch(err) {
+            
+            isRecordingRunning   = false;
+            buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
+
             switch (err.name){
                 case "NotAllowedError":
                     errorMsElem.innerHTML = "&#128165; No Permissions to Record your Screen or you canceled the Recording.";
