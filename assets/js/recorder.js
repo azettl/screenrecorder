@@ -135,19 +135,19 @@
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
-                                aMediaRecorderSingleCh[this.id].push(event.data);
+                                aMediaRecorderSingleCh[oTempFirstMediaRecorder.id].push(event.data);
                             }
                         }
                     );
 
                     oTempFirstMediaRecorder.onstop = function(e){
-                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[this.id]));
+                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]));
                     };
 
                     oTempFirstMediaRecorder.addEventListener(
                         'inactive', 
                         (event) => {
-                            this.stop();
+                            oTempFirstMediaRecorder.stop();
                         }
                     );
 
@@ -182,7 +182,7 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
-                                    aMediaRecorderSingleCh[this.id].push(event.data);
+                                    aMediaRecorderSingleCh[oTempMediaRecorder.id].push(event.data);
                                 }
                             }
                         );
@@ -190,13 +190,13 @@
                         oTempMediaRecorder.addEventListener(
                             'inactive', 
                             (event) => {
-                                this.stop();
+                                oTempMediaRecorder.stop();
                             }
                         );
 
                         oTempMediaRecorder.onstop = function(e){
-                            console.log(this.id);
-                            aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[this.id]));
+                            console.log(oTempMediaRecorder.id);
+                            aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempMediaRecorder.id]));
                         };
                         
                         // Start the Recording and Stop after One Second
