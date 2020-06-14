@@ -328,48 +328,50 @@
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
         // chunk and WEBM download link.
         var iChunkCount = 1;
+        setTimeout(
+            function(){
+                aSingleChunkRecordings.forEach(
+                    function(chunkRecording){
+                        console.log(chunkRecording);
+                        var videoChunkDivElem = document.createElement("div");
+                        videoChunkDivElem.classList.add("chunk");
 
-        console.log(aSingleChunkRecordings);
-        console.log(aSingleChunkRecordings.length);
-        aSingleChunkRecordings.forEach(
-            function(chunkRecording){
-                console.log(chunkRecording);
-                var videoChunkDivElem = document.createElement("div");
-                videoChunkDivElem.classList.add("chunk");
+                        var videoChunkHeadElem = document.createElement("h3");
+                        videoChunkHeadElem.innerText = "Chunk #" + iChunkCount;
+                        videoChunkDivElem.appendChild(videoChunkHeadElem);
 
-                var videoChunkHeadElem = document.createElement("h3");
-                videoChunkHeadElem.innerText = "Chunk #" + iChunkCount;
-                videoChunkDivElem.appendChild(videoChunkHeadElem);
+                        var videoChunkElem = document.createElement("video");
+                        videoChunkElem.id = "video" + iChunkCount;
+                        videoChunkElem.setAttribute("controls", "true");
+                        videoChunkElem.setAttribute("playsinline", "true");
+                        videoChunkElem.setAttribute("controlsList", "nodownload");
+                        
+                        var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
+                        videoChunkElem.src = videoChunkBlob;
+                        videoChunkDivElem.appendChild(videoChunkElem);
 
-                var videoChunkElem = document.createElement("video");
-                videoChunkElem.id = "video" + iChunkCount;
-                videoChunkElem.setAttribute("controls", "true");
-                videoChunkElem.setAttribute("playsinline", "true");
-                videoChunkElem.setAttribute("controlsList", "nodownload");
-                 
-                var videoChunkBlob = window.URL.createObjectURL(chunkRecording);
-                videoChunkElem.src = videoChunkBlob;
-                videoChunkDivElem.appendChild(videoChunkElem);
+                        var videoChunkAElem = document.createElement("a");
+                        videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
+                        videoChunkAElem.classList.add("button");
+                        videoChunkAElem.href = videoChunkBlob;
+                        videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
+                        videoChunkDivElem.appendChild(videoChunkAElem);
 
-                var videoChunkAElem = document.createElement("a");
-                videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
-                videoChunkAElem.classList.add("button");
-                videoChunkAElem.href = videoChunkBlob;
-                videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
-                videoChunkDivElem.appendChild(videoChunkAElem);
+                        var videoChunkAGIFElem = document.createElement("a");
+                        videoChunkAGIFElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download GIF';
+                        videoChunkAGIFElem.classList.add("button");
+                        videoChunkAGIFElem.classList.add("downloadgif");
+                        videoChunkAGIFElem.dataset.videoelement = "video" + iChunkCount;
+                        videoChunkAGIFElem.setAttribute("onclick", "downloadGIF(this.dataset.videoelement, 'screenrecording-chunk-" + iChunkCount + ".gif')");
+                        videoChunkDivElem.appendChild(videoChunkAGIFElem);
 
-                var videoChunkAGIFElem = document.createElement("a");
-                videoChunkAGIFElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download GIF';
-                videoChunkAGIFElem.classList.add("button");
-                videoChunkAGIFElem.classList.add("downloadgif");
-                videoChunkAGIFElem.dataset.videoelement = "video" + iChunkCount;
-                videoChunkAGIFElem.setAttribute("onclick", "downloadGIF(this.dataset.videoelement, 'screenrecording-chunk-" + iChunkCount + ".gif')");
-                videoChunkDivElem.appendChild(videoChunkAGIFElem);
+                        chunksElem.appendChild(videoChunkDivElem);
 
-                chunksElem.appendChild(videoChunkDivElem);
-
-                iChunkCount++;
-            }
+                        iChunkCount++;
+                    }
+                );
+            }, 
+            250
         );
 
         // Hide the Loader Element
