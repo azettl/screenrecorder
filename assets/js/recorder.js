@@ -65,6 +65,17 @@
             chunksHElem.style.display = "none";
             errorMsElem.style.display = "none";
 
+        // Check if navigator and navigator.mediaDevices are available.
+            if(!navigator || !navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+                buttonElem.style.display = "none";
+                isRecordingRunning   = false;
+
+                errorMsElem.innerHTML = "&#128165; Your Browser does not support Screen Recording yet.";
+                errorMsElem.style.display = "block";
+
+                return;
+            }
+
         // Try to Record the Screen
         try {
             // Get the Current Screen and assign it to the Video Elements Source Object 
@@ -229,7 +240,7 @@
                     errorMsElem.style.display = "block";
                     break;
                 case "NotSupportedError":
-                    errorMsElem.innerHTML = "&#128165; Your Browser does not support Screenrecording yet.";
+                    errorMsElem.innerHTML = "&#128165; Your Browser does not support Screen Recording yet.";
                     errorMsElem.style.display = "block";
                     break;
                 default:
