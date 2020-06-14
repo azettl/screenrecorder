@@ -8,7 +8,7 @@
     const loaderElem  = document.getElementById("loader");
     const chunksElem  = document.getElementById("videoChunks");
     const chunksHElem = document.getElementById("videoChunksHeading");
-    const webmDowElem = document.getElementById("resultLinkWEBM");
+    const webmDowElem = document.getElementById("resultLinkWebM");
     const gifDowElem  = document.getElementById("resultLinkGIF");
     const chunkLeElem = document.getElementById("singleChunkLengthInSec");
     const errorMsElem = document.getElementById("errorMsg");
@@ -327,7 +327,7 @@
         // Clear the Interval for the Single Chunk Recording
             clearInterval(oSingleChunkInterval);
   
-        // Create a Object URL of the Full Recording as WEBM
+        // Create a Object URL of the Full Recording as WebM
             oFullObjectURL = window.URL.createObjectURL(
                 new Blob(
                     aFullChunkRecordings, 
@@ -337,7 +337,7 @@
                 )
             );
   
-        // Assign the Object URL to the WEBM Download Link for the Full Recording
+        // Assign the Object URL to the WebM Download Link for the Full Recording
         // and Display the Download Link and Chunks Section.
             webmDowElem.href          = oFullObjectURL;
             webmDowElem.style.display = "inline-block";
@@ -350,7 +350,7 @@
             videoElem.src       = oFullObjectURL;
 
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
-        // chunk and WEBM download link. The timeout is to get the last chunk into the array before this
+        // chunk and WebM download link. The timeout is to get the last chunk into the array before this
         // loop is called.
         var iChunkCount = 1;
         setTimeout(
@@ -384,7 +384,7 @@
                         videoChunkDivElem.appendChild(videoChunkElem);
 
                         var videoChunkAElem = document.createElement("a");
-                        videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WEBM';
+                        videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WebM';
                         videoChunkAElem.classList.add("button");
                         videoChunkAElem.href = videoChunkBlob;
                         videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
