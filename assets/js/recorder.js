@@ -129,7 +129,6 @@
 
                     oTempFirstMediaRecorder.id = 0;
 
-                    console.log(oTempFirstMediaRecorder.id + "--" + videoElem.currentTime);
                     if(!aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]){
                         aMediaRecorderSingleCh[oTempFirstMediaRecorder.id] = [];
                     }   
@@ -138,14 +137,12 @@
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
-                                console.log(event.srcElement.id + "-- dataavailable" + "--" + videoElem.currentTime);
                                 aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                             }
                         }
                     );
 
                     oTempFirstMediaRecorder.onstop = function(event){
-                        console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
                         aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                     };
 
@@ -179,7 +176,6 @@
                                 mimeType: 'video/webm'
                             }
                         );
-                        console.log(id + "--" + videoElem.currentTime);
                         oTempMediaRecorder.id = id;
                         id++;
 
@@ -191,7 +187,6 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
-                                    console.log(event.srcElement.id + "-- dataavailable" + "--" + videoElem.currentTime);
                                     aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                                 }
                             }
@@ -205,7 +200,6 @@
                         );
 
                         oTempMediaRecorder.onstop = function(event){
-                            console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
                             aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                         };
                         
@@ -332,7 +326,6 @@
             function(){
                 aSingleChunkRecordings.forEach(
                     function(chunkRecording){
-                        console.log(chunkRecording);
                         var videoChunkDivElem = document.createElement("div");
                         videoChunkDivElem.classList.add("chunk");
 
