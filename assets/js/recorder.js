@@ -114,7 +114,7 @@
                 isRecordingRunning = true;
 
                 // Define the MediaRecorders for the Single One Second Chunks
-                var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
+                var iSingleChunkLengthInMS = (parseInt(chunkLeElem.value) * 1000) + 250;
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -226,53 +226,52 @@
             buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
 
         // Change Chunk Header
-            var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
             var sSpelledNumber         = "";
 
-            switch (iSingleChunkLengthInMS){
-                case 1000:
+            switch (parseInt(chunkLeElem.value)){
+                case 1:
                     sSpelledNumber = "One";
                     break;
-                case 2000:
+                case 2:
                     sSpelledNumber = "Two";
                     break;
-                case 3000:
+                case 3:
                     sSpelledNumber = "Three";
                     break;
-                case 4000:
+                case 4:
                     sSpelledNumber = "Four";
                     break;
-                case 5000:
+                case 5:
                     sSpelledNumber = "Five";
                     break;
-                case 6000:
+                case 6:
                     sSpelledNumber = "Six";
                     break;
-                case 7000:
+                case 7:
                     sSpelledNumber = "Seven";
                     break;
-                case 8000:
+                case 8:
                     sSpelledNumber = "Eight";
                     break;
-                case 9000:
+                case 9:
                     sSpelledNumber = "Nine";
                     break;
-                case 10000:
+                case 10:
                     sSpelledNumber = "Ten";
                     break;
-                case 11000:
+                case 11:
                     sSpelledNumber = "Eleven";
                     break;
-                case 12000:
+                case 12:
                     sSpelledNumber = "Twelve";
                     break;
-                case 13000:
+                case 13:
                     sSpelledNumber = "Thirteen";
                     break;
-                case 14000:
+                case 14:
                     sSpelledNumber = "Fourteen";
                     break;
-                case 15000:
+                case 15:
                     sSpelledNumber = "Fifteen";
                     break;
             }
