@@ -114,7 +114,7 @@
                 isRecordingRunning = true;
 
                 // Define the MediaRecorders for the Single One Second Chunks
-                var iSingleChunkLengthInMS = (parseInt(chunkLeElem.value) * 1000)/* + 250*/;
+                var iSingleChunkLengthInMS = (parseInt(chunkLeElem.value) * 1000) + 250;
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -216,7 +216,7 @@
                             iSingleChunkLengthInMS
                         );
                     }, 
-                    iSingleChunkLengthInMS
+                    (parseInt(chunkLeElem.value) * 1000)
                 );
         } catch(err) {
             console.error("Error: " + err);
