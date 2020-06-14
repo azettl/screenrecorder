@@ -20,9 +20,7 @@
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
-    var aMediaRecordersChunks  = [];
     var aMediaRecorderSingleCh = [];
-    var iMediaRecordersChunkC  = 0;
 
 // Hide Loader Element when the DOM Content is Loaded
     document.addEventListener(
@@ -52,9 +50,7 @@
             videoElem.src          = "";
             chunksElem.innerHTML   = "";
             aSingleChunkRecordings = [];
-            aMediaRecordersChunks  = [];
             aMediaRecorderSingleCh = [];
-            iMediaRecordersChunkC  = 0;
             aFullChunkRecordings   = [];
 
             if (oFullObjectURL) {
@@ -125,14 +121,14 @@
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
-                    aMediaRecordersChunks[0] = new MediaRecorder(
+                    var oTempFirstMediaRecorder = new MediaRecorder(
                         currentVideo, 
                         {
                             mimeType: 'video/webm'
                         }
                     );    
 
-                    aMediaRecordersChunks[0].addEventListener(
+                    oTempFirstMediaRecorder.addEventListener(
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
@@ -141,23 +137,23 @@
                         }
                     );
 
-                    aMediaRecordersChunks[0].onstop = function(e){
+                    oTempFirstMediaRecorder.onstop = function(e){
                         aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[0]));
                     };
 
-                    aMediaRecordersChunks[0].addEventListener(
+                    oTempFirstMediaRecorder.addEventListener(
                         'inactive', 
                         (event) => {
-                            aMediaRecordersChunks[0].stop();
+                            oTempFirstMediaRecorder.stop();
                         }
                     );
 
                     // Start the Recording and Stop after One Second
-                    aMediaRecordersChunks[0].start(10);
+                    oTempFirstMediaRecorder.start(10);
                     setTimeout(
                         function(){
-                            if(aMediaRecordersChunks[0].state == "recording"){
-                                aMediaRecordersChunks[0].stop();
+                            if(oTempFirstMediaRecorder.state == "recording"){
+                                oTempFirstMediaRecorder.stop();
                             }
                         }, 
                         iSingleChunkLengthInMS
