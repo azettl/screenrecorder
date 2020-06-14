@@ -119,46 +119,45 @@
 
                 // Define the MediaRecorders for the Single One Second Chunks
                 var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
-                aMediaRecorderSingleCh[iMediaRecordersChunkC] = [];
+                aMediaRecorderSingleCh[0] = [];
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
-                    aMediaRecordersChunks[iMediaRecordersChunkC] = new MediaRecorder(
+                    aMediaRecordersChunks[0] = new MediaRecorder(
                         currentVideo, 
                         {
                             mimeType: 'video/webm'
                         }
                     );    
 
-                    aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
+                    aMediaRecordersChunks[0].addEventListener(
                         'dataavailable', 
                         (event) => {
-                            console.log(iMediaRecordersChunkC);
                             if (event.data && event.data.size > 0) {
-                                aMediaRecorderSingleCh[iMediaRecordersChunkC].push(event.data);
+                                aMediaRecorderSingleCh[0].push(event.data);
                             }
                         }
                     );
 
-                    aMediaRecordersChunks[iMediaRecordersChunkC].onstop = function(e){
-                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[iMediaRecordersChunkC]));
+                    aMediaRecordersChunks[0].onstop = function(e){
+                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[0]));
                     };
 
-                    aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
+                    aMediaRecordersChunks[0].addEventListener(
                         'inactive', 
                         (event) => {
-                            aMediaRecordersChunks[iMediaRecordersChunkC].stop();
+                            aMediaRecordersChunks[0].stop();
                         }
                     );
 
                     // Start the Recording and Stop after One Second
-                    aMediaRecordersChunks[iMediaRecordersChunkC].start(10);
+                    aMediaRecordersChunks[0].start(10);
                     setTimeout(
                         function(){
-                            if(aMediaRecordersChunks[iMediaRecordersChunkC].state == "recording"){
-                                aMediaRecordersChunks[iMediaRecordersChunkC].stop();
+                            if(aMediaRecordersChunks[0].state == "recording"){
+                                aMediaRecordersChunks[0].stop();
                             }
                         }, 
                         iSingleChunkLengthInMS
