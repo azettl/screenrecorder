@@ -21,6 +21,7 @@
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
     var aMediaRecordersChunks  = [];
+    var aMediaRecorderSingleCh = [];
     var iMediaRecordersChunkC  = 0;
 
 // Hide Loader Element when the DOM Content is Loaded
@@ -52,6 +53,7 @@
             chunksElem.innerHTML   = "";
             aSingleChunkRecordings = [];
             aMediaRecordersChunks  = [];
+            aMediaRecorderSingleCh = [];
             iMediaRecordersChunkC  = 0;
             aFullChunkRecordings   = [];
 
@@ -117,7 +119,7 @@
 
                 // Define the MediaRecorders for the Single One Second Chunks
                 var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
-                var singleChunks           = [];
+                aMediaRecorderSingleCh[iMediaRecordersChunkC] = [];
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -134,13 +136,13 @@
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
-                                singleChunks.push(event.data);
+                                aMediaRecorderSingleCh[iMediaRecordersChunkC].push(event.data);
                             }
                         }
                     );
 
                     aMediaRecordersChunks[iMediaRecordersChunkC].onstop = function(e){
-                        aSingleChunkRecordings.push(new Blob(singleChunks));
+                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[iMediaRecordersChunkC]));
                     };
 
                     aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
@@ -166,8 +168,10 @@
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
                     oSingleChunkInterval = setInterval(()=>{
-                        var singleChunks           = [];
                         iMediaRecordersChunkC++;
+                        if(!aMediaRecorderSingleCh[iMediaRecordersChunkC]){
+                            aMediaRecorderSingleCh[iMediaRecordersChunkC] = [];
+                        }
 
                         aMediaRecordersChunks[iMediaRecordersChunkC] = new MediaRecorder(
                             currentVideo, 
@@ -180,7 +184,7 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
-                                    singleChunks.push(event.data);
+                                    aMediaRecorderSingleCh[iMediaRecordersChunkC].push(event.data);
                                 }
                             }
                         );
@@ -193,7 +197,7 @@
                         );
 
                         aMediaRecordersChunks[iMediaRecordersChunkC].onstop = function(e){
-                            aSingleChunkRecordings.push(new Blob(singleChunks));
+                            aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[iMediaRecordersChunkC]));
                         };
                         
                         // Start the Recording and Stop after One Second
