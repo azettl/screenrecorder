@@ -193,6 +193,7 @@
                         aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
                             'inactive', 
                             (event) => {
+                                console.log(this);
                                 aMediaRecordersChunks[iMediaRecordersChunkC].stop();
                             }
                         );
