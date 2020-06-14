@@ -138,6 +138,7 @@
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
+                                console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
                                 aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                             }
                         }
@@ -190,6 +191,7 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
+                                    console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
                                     aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                                 }
                             }
