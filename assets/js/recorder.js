@@ -217,6 +217,7 @@
                     (parseInt(chunkLeElem.value) * 1000)
                 );
         } catch(err) {
+            console.log(err);
             console.error("Error: " + err);
         }
     } 
