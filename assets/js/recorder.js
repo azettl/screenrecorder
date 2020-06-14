@@ -215,7 +215,7 @@
                             iSingleChunkLengthInMS
                         );
                     }, 
-                    iSingleChunkLengthInMS
+                    0
                 );
         } catch(err) {
             console.error("Error: " + err);
