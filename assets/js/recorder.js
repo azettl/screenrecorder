@@ -202,6 +202,7 @@
                         );
 
                         oTempMediaRecorder.onstop = function(event){
+                            console.log(event.srcElement.id + "-- onstop");
                             aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                         };
                         
@@ -295,6 +296,9 @@
                     }
                 );
             }
+
+        // Clear the Interval for the Single Chunk Recording
+            clearInterval(oSingleChunkInterval);
   
         // Create a Object URL of the Full Recording as WEBM
             oFullObjectURL = window.URL.createObjectURL(
@@ -317,9 +321,6 @@
         // then Play the Video
             videoElem.srcObject = null;
             videoElem.src       = oFullObjectURL;
-
-        // Clear the Interval for the Single Chunk Recording
-            clearInterval(oSingleChunkInterval);
 
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
         // chunk and WEBM download link.
