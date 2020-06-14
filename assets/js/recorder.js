@@ -327,6 +327,15 @@
             function(){
                 aSingleChunkRecordings.forEach(
                     function(chunkRecording){
+                        var oCheckVideoElem = document.getElementById("video" + iChunkCount);
+                        if(oCheckVideoElem){
+                            var oCheckWrapperDiv = oCheckVideoElem.parentNode;
+                            if(oCheckWrapperDiv){
+                                oCheckWrapperDiv.parentNode.removeChild(oCheckWrapperDiv);
+                            }
+                        }
+
+
                         var videoChunkDivElem = document.createElement("div");
                         videoChunkDivElem.classList.add("chunk");
 
