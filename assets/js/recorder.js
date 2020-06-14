@@ -195,7 +195,7 @@
                         );
 
                         oTempMediaRecorder.onstop = function(e){
-                            console.log(this);
+                            console.log(this.stream.id);
                             aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempMediaRecorder.id]));
                         };
                         
@@ -283,8 +283,11 @@
         // Stop all the Tracks on the Video Elements Source Object
             if(videoElem.srcObject){
                 let tracks = videoElem.srcObject.getTracks();
-                console.log(tracks);
-                tracks.forEach(track => track.stop());
+                tracks.forEach(
+                    function(track){
+                        track.stop();
+                    }
+                );
             }
 
         // Clear the Interval for the Single Chunk Recording
