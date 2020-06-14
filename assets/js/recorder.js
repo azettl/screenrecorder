@@ -60,7 +60,7 @@
         // Change Button Text to "Stop Capture" and Hide the Download Button + One Second Chunks Section
             buttonElem.innerHTML      = '<i class="fa fa-stop-circle" aria-hidden="true"></i> Stop Capture';
             webmDowElem.style.display = "none";
-            gifDowElem.style.display = "none";
+            gifDowElem.style.display  = "none";
             chunksHElem.style.display = "none";
 
         // Try to Record the Screen
@@ -115,7 +115,6 @@
 
                 // Define the MediaRecorders for the Single One Second Chunks
                 var iSingleChunkLengthInMS = parseInt(chunkLeElem.value) * 1000;
-                aMediaRecorderSingleCh[0] = [];
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -126,19 +125,23 @@
                         {
                             mimeType: 'video/webm'
                         }
-                    );    
+                    );
+
+                    if(!aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]){
+                        aMediaRecorderSingleCh[oTempFirstMediaRecorder.id] = [];
+                    }   
 
                     oTempFirstMediaRecorder.addEventListener(
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
-                                aMediaRecorderSingleCh[0].push(event.data);
+                                aMediaRecorderSingleCh[oTempFirstMediaRecorder.id].push(event.data);
                             }
                         }
                     );
 
                     oTempFirstMediaRecorder.onstop = function(e){
-                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[0]));
+                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]));
                     };
 
                     oTempFirstMediaRecorder.addEventListener(
