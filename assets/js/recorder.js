@@ -129,6 +129,7 @@
 
                     oTempFirstMediaRecorder.id = 0;
 
+                    console.log(id + "--" + videoElem.currentTime);
                     if(!aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]){
                         aMediaRecorderSingleCh[oTempFirstMediaRecorder.id] = [];
                     }   
@@ -176,7 +177,7 @@
                                 mimeType: 'video/webm'
                             }
                         );
-                        console.log(id);
+                        console.log(id + "--" + videoElem.currentTime);
                         oTempMediaRecorder.id = id;
                         id++;
 
