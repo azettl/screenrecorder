@@ -48,7 +48,6 @@
         // Clear Data from the Previous Recording
             videoElem.srcObject    = null;
             videoElem.src          = "";
-            chunksElem.innerHTML   = "";
             aSingleChunkRecordings = [];
             aMediaRecorderSingleCh = [];
             aFullChunkRecordings   = [];
