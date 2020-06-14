@@ -195,7 +195,7 @@
                         );
 
                         oTempMediaRecorder.onstop = function(e){
-                            console.log(oTempMediaRecorder.id);
+                            console.log(this);
                             aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempMediaRecorder.id]));
                         };
                         
