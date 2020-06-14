@@ -320,7 +320,8 @@
             videoElem.src       = oFullObjectURL;
 
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
-        // chunk and WEBM download link.
+        // chunk and WEBM download link. The timeout is to get the last chunk into the array before this
+        // loop is called.
         var iChunkCount = 1;
         setTimeout(
             function(){
