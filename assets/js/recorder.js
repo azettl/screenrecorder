@@ -173,7 +173,11 @@
                             {
                                 mimeType: 'video/webm'
                             }
-                        );    
+                        );
+
+                        if(!aMediaRecorderSingleCh[oTempMediaRecorder.id]){
+                            aMediaRecorderSingleCh[oTempMediaRecorder.id] = [];
+                        }
 
                         oTempMediaRecorder.addEventListener(
                             'dataavailable', 
