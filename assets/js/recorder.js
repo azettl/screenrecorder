@@ -193,12 +193,12 @@
                         aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
                             'inactive', 
                             (event) => {
-                                console.log(this);
                                 aMediaRecordersChunks[iMediaRecordersChunkC].stop();
                             }
                         );
 
                         aMediaRecordersChunks[iMediaRecordersChunkC].onstop = function(e){
+                            console.log(this);
                             aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[iMediaRecordersChunkC]));
                         };
                         
