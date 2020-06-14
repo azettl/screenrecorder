@@ -53,6 +53,11 @@
         text-align: center;
         font-weight: 900;
     }
+
+    .u{
+        text-decoration: underline var(--button-color);
+        text-decoration-skip-ink: auto;
+    }
 /* END:: General */
 
 /* START:: Video Elements */
