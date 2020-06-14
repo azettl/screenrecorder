@@ -114,7 +114,7 @@
                 isRecordingRunning = true;
 
                 // Define the MediaRecorders for the Single One Second Chunks
-                var iSingleChunkLengthInMS = (parseInt(chunkLeElem.value) * 1000) + 250;
+                var iSingleChunkLengthInMS = (parseInt(chunkLeElem.value) * 1000)/* + 250*/;
 
                 // The First Chunk is handled Outside of the Interval and Push the Data to the 
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
@@ -129,7 +129,7 @@
 
                     oTempFirstMediaRecorder.id = 0;
 
-                    console.log(id + "--" + videoElem.currentTime);
+                    console.log(oTempFirstMediaRecorder.id + "--" + videoElem.currentTime);
                     if(!aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]){
                         aMediaRecorderSingleCh[oTempFirstMediaRecorder.id] = [];
                     }   
