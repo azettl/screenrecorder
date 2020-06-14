@@ -135,6 +135,7 @@
                     aMediaRecordersChunks[iMediaRecordersChunkC].addEventListener(
                         'dataavailable', 
                         (event) => {
+                            console.log(iMediaRecordersChunkC);
                             if (event.data && event.data.size > 0) {
                                 aMediaRecorderSingleCh[iMediaRecordersChunkC].push(event.data);
                             }
