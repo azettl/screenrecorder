@@ -144,6 +144,7 @@
                     );
 
                     oTempFirstMediaRecorder.onstop = function(event){
+                        console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
                         aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                     };
 
@@ -202,7 +203,7 @@
                         );
 
                         oTempMediaRecorder.onstop = function(event){
-                            console.log(event.srcElement.id + "-- onstop");
+                            console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
                             aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                         };
                         
