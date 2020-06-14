@@ -42,6 +42,17 @@
     header, article, footer {
         padding: 0 2rem;
     }
+
+    #errorMsg{
+        display: block;
+        padding: .5rem 2rem;
+        background: #b1063f;
+        color: #fff;
+        border-radius: .25rem;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 900;
+    }
 /* END:: General */
 
 /* START:: Video Elements */
