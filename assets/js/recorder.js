@@ -127,27 +127,29 @@
                         }
                     );
 
-                    if(!aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]){
-                        aMediaRecorderSingleCh[oTempFirstMediaRecorder.id] = [];
+                    oTempFirstMediaRecorder.id = 0;
+
+                    if(!aMediaRecorderSingleCh[event.srcElement.id]){
+                        aMediaRecorderSingleCh[event.srcElement.id] = [];
                     }   
 
                     oTempFirstMediaRecorder.addEventListener(
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
-                                aMediaRecorderSingleCh[oTempFirstMediaRecorder.id].push(event.data);
+                                aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                             }
                         }
                     );
 
                     oTempFirstMediaRecorder.onstop = function(e){
-                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempFirstMediaRecorder.id]));
+                        aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                     };
 
                     oTempFirstMediaRecorder.addEventListener(
                         'inactive', 
                         (event) => {
-                            oTempFirstMediaRecorder.stop();
+                            event.srcElement.stop();
                         }
                     );
 
@@ -176,18 +178,17 @@
                         );
                         oTempMediaRecorder.id = id;
                         id++;
-                        console.log(oTempMediaRecorder.id);
 
-                        if(!aMediaRecorderSingleCh[oTempMediaRecorder.id]){
-                            aMediaRecorderSingleCh[oTempMediaRecorder.id] = [];
+                        if(!aMediaRecorderSingleCh[event.srcElement.id]){
+                            aMediaRecorderSingleCh[event.srcElement.id] = [];
                         }
 
                         oTempMediaRecorder.addEventListener(
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
-                                    console.log(event.srcElement.id);
-                                    aMediaRecorderSingleCh[oTempMediaRecorder.id].push(event.data);
+                                    console.log();
+                                    aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                                 }
                             }
                         );
@@ -195,13 +196,12 @@
                         oTempMediaRecorder.addEventListener(
                             'inactive', 
                             (event) => {
-                                oTempMediaRecorder.stop();
+                                event.srcElement.stop();
                             }
                         );
 
                         oTempMediaRecorder.onstop = function(e){
-                            console.log(e);
-                            aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[oTempMediaRecorder.id]));
+                            aSingleChunkRecordings.push(new Blob(aMediaRecorderSingleCh[event.srcElement.id]));
                         };
                         
                         // Start the Recording and Stop after One Second
