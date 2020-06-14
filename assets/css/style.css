@@ -58,6 +58,28 @@
         text-decoration: underline var(--button-color);
         text-decoration-skip-ink: auto;
     }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active{
+        color: var(--text-color);
+        text-decoration-skip-ink: auto;
+        text-decoration: underline;
+    }
+
+    a,
+    a:visited{
+        text-decoration: underline var(--button-color);
+    }
+    
+    a:hover{
+        text-decoration: underline var(--button-color-hover);
+    }
+
+    a:active{
+        text-decoration: underline var(--button-color-active);
+    }
 /* END:: General */
 
 /* START:: Video Elements */
