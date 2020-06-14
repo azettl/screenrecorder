@@ -165,8 +165,8 @@
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
-                    var singleChunks           = [];
                     oSingleChunkInterval = setInterval(()=>{
+                        var singleChunks           = [];
                         iMediaRecordersChunkC++;
 
                         aMediaRecordersChunks[iMediaRecordersChunkC] = new MediaRecorder(
