@@ -166,6 +166,7 @@
                 // singleChunks Array whenever Data is Available. When the Recording Stops then
                 // the singleChunks Array gets pushed into the aSingleChunkRecordings Array as 
                 // a BLOB.
+                    var id = 1;
                     oSingleChunkInterval = setInterval(()=>{
                         var oTempMediaRecorder = new MediaRecorder(
                             currentVideo, 
@@ -173,6 +174,8 @@
                                 mimeType: 'video/webm'
                             }
                         );
+                        oTempMediaRecorder.id = id;
+                        console.log(oTempMediaRecorder.id);
 
                         if(!aMediaRecorderSingleCh[oTempMediaRecorder.id]){
                             aMediaRecorderSingleCh[oTempMediaRecorder.id] = [];
@@ -182,6 +185,7 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
+                                    console.log(srcElement.id);
                                     aMediaRecorderSingleCh[oTempMediaRecorder.id].push(event.data);
                                 }
                             }
