@@ -175,6 +175,7 @@
                             }
                         );
                         oTempMediaRecorder.id = id;
+                        id++;
                         console.log(oTempMediaRecorder.id);
 
                         if(!aMediaRecorderSingleCh[oTempMediaRecorder.id]){
@@ -185,7 +186,7 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
-                                    console.log(srcElement.id);
+                                    console.log(event.srcElement.id);
                                     aMediaRecorderSingleCh[oTempMediaRecorder.id].push(event.data);
                                 }
                             }
