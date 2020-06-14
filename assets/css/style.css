@@ -1,7 +1,7 @@
 :root{
     --button-color:#6ac2b6;
     --button-color-hover:#009688;
-    --button-color-active:#ff5722;
+    --button-color-active:#b1063f;
     --text-color:#333;
 }
 
@@ -31,8 +31,7 @@
     }
 
     h1{
-        font-size: 4rem;
-        word-break: break-all;
+        font-size: 3rem;
     }
 
     footer{
@@ -46,7 +45,7 @@
     #errorMsg{
         display: block;
         padding: .5rem 2rem;
-        background: #b1063f;
+        background: var(--button-color-active);
         color: #fff;
         border-radius: .25rem;
         text-transform: uppercase;
@@ -150,6 +149,7 @@
     }
 
     button:active, .button:active{
+        color:#fff;
         background: var(--button-color-active);
     }
 /* END:: Buttons */
