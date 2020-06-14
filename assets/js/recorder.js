@@ -11,6 +11,7 @@
     const webmDowElem = document.getElementById("resultLinkWEBM");
     const gifDowElem  = document.getElementById("resultLinkGIF");
     const chunkLeElem = document.getElementById("singleChunkLengthInSec");
+    const errorMsElem = document.getElementById("errorMsg");
 
 // Define Global Variables
     var isRecordingRunning     = false;
@@ -62,6 +63,7 @@
             webmDowElem.style.display = "none";
             gifDowElem.style.display  = "none";
             chunksHElem.style.display = "none";
+            errorMsElem.style.display = "none";
 
         // Try to Record the Screen
         try {
@@ -217,8 +219,20 @@
                     (parseInt(chunkLeElem.value) * 1000)
                 );
         } catch(err) {
-            console.log(err.name);
-            console.error("Error: " + err);
+            switch (err.name){
+                case "NotAllowedError":
+                    errorMsElem.innerHTML = "&#128165; No Permissions to Record your Screen or you canceled the Recording.";
+                    errorMsElem.style.display = "block";
+                    break;
+                case "NotSupportedError":
+                    errorMsElem.innerHTML = "&#128165; Your Browser does not support Screenrecording yet.";
+                    errorMsElem.style.display = "block";
+                    break;
+                default:
+                    errorMsElem.innerHTML = "&#128165; Error: " + err;
+                    errorMsElem.style.display = "block";
+                    break;
+            }
         }
     } 
 
