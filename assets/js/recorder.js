@@ -138,7 +138,7 @@
                         'dataavailable', 
                         (event) => {
                             if (event.data && event.data.size > 0) {
-                                console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
+                                console.log(event.srcElement.id + "-- dataavailable" + "--" + videoElem.currentTime);
                                 aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                             }
                         }
@@ -191,7 +191,7 @@
                             'dataavailable', 
                             (event) => {
                                 if (event.data && event.data.size > 0) {
-                                    console.log(event.srcElement.id + "-- onstop" + "--" + videoElem.currentTime);
+                                    console.log(event.srcElement.id + "-- dataavailable" + "--" + videoElem.currentTime);
                                     aMediaRecorderSingleCh[event.srcElement.id].push(event.data);
                                 }
                             }
@@ -329,6 +329,7 @@
         // chunk and WEBM download link.
         var iChunkCount = 1;
 
+        console.log(aSingleChunkRecordings);
         aSingleChunkRecordings.forEach(
             function(chunkRecording){
                 var videoChunkDivElem = document.createElement("div");
