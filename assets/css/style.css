@@ -229,7 +229,7 @@ label{
 }
 
 input[type="range"]{
-    -webkit-appearance: none;
+    -webkit-appearance:none;
     border-radius: .25rem;
     border: 2px solid var(--text-color);
     margin:0;
@@ -304,6 +304,36 @@ datalist > option {
     align-items: end;
 }
 /* END:: Range Input */
+
+/* START:: Check Box for User Video and Audio */
+.checkbox{
+    display: flex;
+    align-items: center;
+}
+
+.checkbox label{
+    margin-top: 0;
+    cursor: pointer;
+}
+
+input[type="checkbox"]{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    border-radius: .25rem;
+    border: 2px solid var(--text-color);
+    outline: 0;
+    height: 2rem;
+    width: 2rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+input[type="checkbox"]:checked{
+    background-color: var(--button-color-active);
+}
+/* END:: Check Box for User Video and Audio */
 
 /* START:: GitHub Corner */
 .github-corner:hover .octo-arm{
