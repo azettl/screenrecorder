@@ -4,6 +4,7 @@
 
 // Define Element Constants
     const videoElem   = document.getElementById("video");
+    const videoCamElem= document.getElementById("videoCam");
     const buttonElem  = document.getElementById("button");
     const loaderElem  = document.getElementById("loader");
     const chunksElem  = document.getElementById("videoChunks");
@@ -12,12 +13,14 @@
     const gifDowElem  = document.getElementById("resultLinkGIF");
     const chunkLeElem = document.getElementById("singleChunkLengthInSec");
     const errorMsElem = document.getElementById("errorMsg");
+    const userCamElem = document.getElementById("addUserVideoAudio");
 
 // Define Global Variables
     var isRecordingRunning     = false;
 
     var oSingleChunkInterval   = null;
     var oFullObjectURL         = null;
+    var oCurrentVideoCam       = null;
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
@@ -29,6 +32,19 @@
         (event) => {
             loaderElem.style.display = "none";
         }
+    );
+
+// Attach Event Listener to ask for permissions for user audio and video on click of the checkbox
+    userCamElem.addEventListener(
+        "click", 
+        (event) => {
+            if(userCamElem.checked){
+                getUserVideoAudioMedia();
+            }else{
+                videoCamElem.style.display = "none";
+            }
+        }, 
+        false
     );
 
 // Attach Event Listener to the Start/Stop Recording Button
@@ -46,6 +62,41 @@
         }, 
         false
     );
+
+// Define the function to get the user video and audio
+    async function getUserVideoAudioMedia() {
+    
+        try {
+            oCurrentVideoCam = await navigator.mediaDevices.getUserMedia(
+                {
+                    audio: true,
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                }
+            );
+            
+            videoCamElem.srcObject = oCurrentVideoCam;
+
+        /* use the stream */
+        } catch(err) {
+            switch (err.name){
+                case "NotAllowedError":
+                    errorMsElem.innerHTML = "&#128165; No Permissions to Record your User Video and Audio or you canceled the Recording.";
+                    errorMsElem.style.display = "block";
+                    break;
+                case "NotSupportedError":
+                    errorMsElem.innerHTML = "&#128165; Your Browser does not support User Video and Audio Recording yet.";
+                    errorMsElem.style.display = "block";
+                    break;
+                default:
+                    errorMsElem.innerHTML = "&#128165; Error: " + err;
+                    errorMsElem.style.display = "block";
+                    break;
+            }
+        }
+    }
 
 // Definition of the async startCapture function
     async function startCapture() {

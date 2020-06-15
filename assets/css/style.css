@@ -104,7 +104,8 @@
     #videoChunksHeading,
     #resultLinkWebM,
     #resultLinkGIF,
-    #errorMsg{
+    #errorMsg,
+    #videoCam{
         display: none;
     }
 /* END:: Chunks */
