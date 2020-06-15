@@ -15,6 +15,8 @@ function downloadGIF(sOrgVideoElem, sFileName){
                 a.download = fileName;
                 a.click();
                 window.URL.revokeObjectURL(url);
+                // Track GIF Download with Fathom 
+                    window.fathom.trackGoal('MLQ7ZDT8', 0);
             };
         }());
     

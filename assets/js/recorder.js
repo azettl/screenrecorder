@@ -253,6 +253,9 @@
 
 // Definition of the stopCapture function
     function stopCapture(evt) {
+        // Track Screen Recording with Fathom 
+            window.fathom.trackGoal('9VXPTH8L', 0);
+
         // Set the isRecordingRunning Variable to FALSE cause the stopped the Recording
             isRecordingRunning = false;
 
@@ -341,6 +344,9 @@
         // and Display the Download Link and Chunks Section.
             webmDowElem.href          = oFullObjectURL;
             webmDowElem.style.display = "inline-block";
+            // Track WebM Download with Fathom 
+                webmDowElem.onclick       = "window.fathom.trackGoal('NZ32QPJA', 0);";
+
             gifDowElem.style.display  = "inline-block";
             chunksHElem.style.display = "inline-block";
 
@@ -387,6 +393,9 @@
                         videoChunkAElem.innerHTML = '<i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Download WebM';
                         videoChunkAElem.classList.add("button");
                         videoChunkAElem.href = videoChunkBlob;
+                        // Track WebM Download with Fathom 
+                            videoChunkAElem.onclick       = "window.fathom.trackGoal('NZ32QPJA', 0);";
+                            
                         videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
                         videoChunkDivElem.appendChild(videoChunkAElem);
 
