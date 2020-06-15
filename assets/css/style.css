@@ -35,6 +35,7 @@
     }
 
     footer{
+        border-top:2px solid var(--button-color);
         margin:2rem 0;
     }
 
