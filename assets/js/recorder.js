@@ -37,6 +37,9 @@
         (event) => {
             if(isRecordingRunning){
                 stopCapture();
+                
+                // Track Screen Recording with Fathom 
+                    window.fathom.trackGoal('9VXPTH8L', 0);
             }else{
                 startCapture();
             }
@@ -253,9 +256,6 @@
 
 // Definition of the stopCapture function
     function stopCapture(evt) {
-        // Track Screen Recording with Fathom 
-            window.fathom.trackGoal('9VXPTH8L', 0);
-
         // Set the isRecordingRunning Variable to FALSE cause the stopped the Recording
             isRecordingRunning = false;
 
@@ -395,7 +395,7 @@
                         videoChunkAElem.href = videoChunkBlob;
                         // Track WebM Download with Fathom 
                             videoChunkAElem.onclick       = "window.fathom.trackGoal('NZ32QPJA', 0);";
-                            
+
                         videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
                         videoChunkDivElem.appendChild(videoChunkAElem);
 
