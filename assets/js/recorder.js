@@ -97,6 +97,9 @@
                     'inactive', 
                     (event) => {
                         stopCapture(event);
+                        
+                        // Track Screen Recording with Fathom 
+                            window.fathom.trackGoal('9VXPTH8L', 0);
                     }
                 );
 
