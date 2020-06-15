@@ -345,7 +345,7 @@
             webmDowElem.href          = oFullObjectURL;
             webmDowElem.style.display = "inline-block";
             // Track WebM Download with Fathom 
-                webmDowElem.onclick       = "window.fathom.trackGoal('NZ32QPJA', 0);";
+                webmDowElem.setAttribute("onclick", "window.fathom.trackGoal('NZ32QPJA', 0);");
 
             gifDowElem.style.display  = "inline-block";
             chunksHElem.style.display = "inline-block";
@@ -394,7 +394,7 @@
                         videoChunkAElem.classList.add("button");
                         videoChunkAElem.href = videoChunkBlob;
                         // Track WebM Download with Fathom 
-                            videoChunkAElem.onclick       = "window.fathom.trackGoal('NZ32QPJA', 0);";
+                            videoChunkAElem.setAttribute("onclick", "window.fathom.trackGoal('NZ32QPJA', 0);")
 
                         videoChunkAElem.download = "screenrecording-chunk-" + iChunkCount + ".webm";
                         videoChunkDivElem.appendChild(videoChunkAElem);
