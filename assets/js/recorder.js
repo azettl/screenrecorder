@@ -89,7 +89,7 @@
                         video: {
                             cursor: "always"
                         },
-                        audio: false
+                        audio: true
                     }
                 );
 
