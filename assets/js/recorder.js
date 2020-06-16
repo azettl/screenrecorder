@@ -45,14 +45,23 @@
             }else{
                 videoCamElem.style.display = "none";
 
-                videoCamElem.srcObject    = null;
-                videoCamElem.src          = "";
     
                 if (oCurrentVideoCamObjectURL) {
                     window.URL.revokeObjectURL(oCurrentVideoCamObjectURL);
                 }
 
-                oCurrentVideoCam.stop();
+                // Stop all the Tracks on the Video Elements Source Object
+                    if(videoCamElem.srcObject){
+                        let tracks = videoCamElem.srcObject.getTracks();
+                        tracks.forEach(
+                            function(track){
+                                track.stop();
+                            }
+                        );
+                    }
+            
+                videoCamElem.srcObject    = null;
+                videoCamElem.src          = "";
             }
         }, 
         false
