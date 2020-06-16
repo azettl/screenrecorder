@@ -185,9 +185,8 @@
                     );
 
                     // Add the screen capture. Position it to fill the whole stream (the default)
-                    let {width, height} = currentVideo.getTracks()[0].getSettings();
-console.log(width);
-console.log(height);
+                    await new Promise(resolve => videoElem.onloadedmetadata = resolve);
+console.log(`${videoElem.videoWidth}x${videoElem.videoHeight}`); // 640x480
                         console.log(merger);
 
                     merger.addStream(currentVideo, {
