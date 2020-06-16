@@ -160,6 +160,16 @@
                     currentVideo.addTrack(
                         oCurrentVideoCam.getAudioTracks()[0]
                     );
+
+                    currentVideo.getVideoTracks()[0].addEventListener(
+                        'ended', 
+                        (event) => {
+                            stopCapture(event);
+                            
+                            // Track Screen Recording with Fathom 
+                                window.fathom.trackGoal('9VXPTH8L', 0);
+                        }
+                    );
                 }
 
                 currentVideo.addEventListener(
