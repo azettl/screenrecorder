@@ -163,6 +163,7 @@
                     currentVideo.addTrack(
                         oCurrentVideoCam.getAudioTracks()[0]
                     );
+                    currentVideo.getTrackById(currentVideo.getAudioTracks()[1].id).enabled = true;
 
                     currentVideo.getVideoTracks()[0].addEventListener(
                         'ended', 
