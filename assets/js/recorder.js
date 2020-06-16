@@ -188,7 +188,8 @@
                     videoElem.play();
 console.log(videoElem.videoWidth);
 console.log(videoElem.videoHeight);
-videoElem.stop();
+videoElem.pause();
+videoElem.currentTime = 0;
                         console.log(merger);
 
                     merger.addStream(currentVideo, {
