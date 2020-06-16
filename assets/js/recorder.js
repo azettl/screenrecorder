@@ -203,9 +203,9 @@
                             var width  = (videoElem.videoWidth / 100) * 30;
                             var height = (videoElem.videoHeight / 100) * 30;
                             // You can do whatever you want with this canvas context
-                           // ctx.drawImage(frame, x, y, width, height);
+                            ctx.drawImage(frame, x, y, width, height);
 
-                            var img = new Image();
+                            /*var img = new Image();
 
                             img.onload = function(){
                             
@@ -218,8 +218,8 @@
                             };
                             
                             img.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==";
-
-                            console.log(frame);
+*/
+                            //console.log(frame);
 
                             done();
                         }
