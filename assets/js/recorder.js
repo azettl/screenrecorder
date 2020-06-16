@@ -177,6 +177,7 @@
 
                 if(userVideoElem.checked){
 
+                    await new Promise(resolve => videoElem.onloadedmetadata = resolve);
                     var merger = new VideoStreamMerger(
                         {
                             width: videoElem.videoWidth,   // Width of the output video
@@ -185,10 +186,6 @@
                     );
 
                     // Add the screen capture. Position it to fill the whole stream (the default)
-                    await new Promise(resolve => videoElem.onloadedmetadata = resolve);
-console.log(`${videoElem.videoWidth}x${videoElem.videoHeight}`); // 640x480
-                        console.log(merger);
-
                     merger.addStream(currentVideo, {
                         x: 0, // position of the topleft corner
                         y: 0,
