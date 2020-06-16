@@ -84,7 +84,7 @@
         try {
             oCurrentVideoCam = await navigator.mediaDevices.getUserMedia(
                 {
-                    audio: (userAudioElem.checked ? true : false),
+                    audio: true,
                     video: (userVideoElem.checked ? true : false)
                 }
             );
@@ -218,7 +218,8 @@
                             //console.log(frame);
 
                             done();
-                        }
+                        },
+                        mute: (userAudioElem.checked ? false : true)
                     })
 
                     // Start the merging. Calling this makes the result available to us
