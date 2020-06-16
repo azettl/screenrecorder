@@ -185,6 +185,9 @@
                     );
 
                     // Add the screen capture. Position it to fill the whole stream (the default)
+
+                        console.log(merger);
+
                     merger.addStream(currentVideo, {
                         x: 0, // position of the topleft corner
                         y: 0,
