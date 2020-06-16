@@ -152,18 +152,16 @@
                         video: {
                             cursor: "always"
                         },
-                        audio: true
+                        audio: {
+                           volume: (userCamElem.checked ? 0.5 : 1) 
+                        }
                     }
                 );
 
                 if(userCamElem.checked){
-                    if(currentVideo.getAudioTracks()[0]){
-                        currentVideo.getTrackById(currentVideo.getAudioTracks()[0].id).applyConstraints({ volume: 0.5 });
-                    }
                     currentVideo.addTrack(
                         oCurrentVideoCam.getAudioTracks()[0]
                     );
-                    currentVideo.getTrackById(currentVideo.getAudioTracks()[1].id).enabled = true;
 
                     currentVideo.getVideoTracks()[0].addEventListener(
                         'ended', 
