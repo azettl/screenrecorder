@@ -40,12 +40,8 @@
         "click", 
         (event) => {
             if(userCamElem.checked){
-                videoCamElem.style.display = "block";
                 getUserVideoAudioMedia();
             }else{
-                videoCamElem.style.display = "none";
-
-    
                 if (oCurrentVideoCamObjectURL) {
                     window.URL.revokeObjectURL(oCurrentVideoCamObjectURL);
                 }
@@ -90,10 +86,7 @@
             oCurrentVideoCam = await navigator.mediaDevices.getUserMedia(
                 {
                     audio: true,
-                    video: {
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    }
+                    video: false
                 }
             );
             videoCamElem.srcObject = oCurrentVideoCam;
@@ -163,11 +156,11 @@
                     }
                 );
 
-                currentVideo.addTrack(
-                    oCurrentVideoCam.getAudioTracks()[0]
-                );
-
-                console.log(currentVideo.getTracks());
+                if(userCamElem.checked){
+                    currentVideo.addTrack(
+                        oCurrentVideoCam.getAudioTracks()[0]
+                    );
+                }
 
                 currentVideo.addEventListener(
                     'inactive', 
@@ -337,6 +330,11 @@
     function stopCapture(evt) {
         // Set the isRecordingRunning Variable to FALSE cause the stopped the Recording
             isRecordingRunning = false;
+
+        // Stop User Video and Audio Recording
+            if(userCamElem.checked){
+                userCamElem.click();
+            }
 
         // Set Button Label to Start Capture
             buttonElem.innerHTML = '<i class="fa fa-play-circle" aria-hidden="true"></i> Start Capture';
