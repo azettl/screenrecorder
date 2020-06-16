@@ -157,6 +157,9 @@
                 );
 
                 if(userCamElem.checked){
+                    if(currentVideo.getAudioTracks()[0]){
+                        currentVideo.getTrackById(currentVideo.getAudioTracks()[0].id).applyConstraints({ volume: 0.5 });
+                    }
                     currentVideo.addTrack(
                         oCurrentVideoCam.getAudioTracks()[0]
                     );
