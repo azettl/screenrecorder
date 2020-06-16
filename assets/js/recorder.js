@@ -203,7 +203,7 @@
                             var width  = (videoElem.videoWidth / 100) * 30;
                             var height = (videoElem.videoHeight / 100) * 30;
                             // You can do whatever you want with this canvas context
-                            ctx.fillRect(x -10, y - 10, width + 10, height + 10);
+                            ctx.fillRect(x -5, y - 5, width + 5, height + 5);
                             ctx.drawImage(frame, x, y, width, height);
 /*
                            
