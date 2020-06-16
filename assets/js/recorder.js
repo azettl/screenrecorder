@@ -179,7 +179,12 @@
 
                 if(userVideoElem.checked){
 
-                    var merger = new VideoStreamMerger();
+                    var merger = new VideoStreamMerger(
+                        {
+                            width: videoElem.videoWidth,   // Width of the output video
+                            height: videoElem.videoHeight,  // Height of the output video
+                        }
+                    );
 
                     // Add the screen capture. Position it to fill the whole stream (the default)
                     merger.addStream(currentVideo, {
