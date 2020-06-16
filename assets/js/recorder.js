@@ -23,6 +23,7 @@
     var oFullObjectURL            = null;
     var oCurrentVideoCamObjectURL = null;
     var oCurrentVideoCam          = null;
+    var currentVideo              = null;
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
@@ -167,14 +168,12 @@
             // Get the Current Screen and assign it to the Video Elements Source Object 
             // and the currentVideo Constant. Stop the Recording when the User Stops Sharing his Screen
             // via the "inactive" Event.
-                const currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
+                currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
                     {
                         video: {
                             cursor: "always"
                         },
-                        audio: {
-                           volume: (userAudioElem.checked ? 0.5 : 1) 
-                        }
+                        audio: true
                     }
                 );
 
@@ -394,6 +393,9 @@
         // Stop User Video and Audio Recording
             if(userAudioElem.checked){
                 userAudioElem.click();
+            }
+            if(userVideoElem.checked){
+                userVideoElem.click();
             }
 
         // Set Button Label to Start Capture
