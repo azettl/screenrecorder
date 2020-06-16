@@ -163,6 +163,12 @@
                     }
                 );
 
+                currentVideo.addTrack(
+                    oCurrentVideoCam.getAudioTracks()[0]
+                );
+
+                console.log(currentVideo.getTracks());
+
                 currentVideo.addEventListener(
                     'inactive', 
                     (event) => {
