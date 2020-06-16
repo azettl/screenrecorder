@@ -89,7 +89,6 @@
                 }
             );
             videoCamElem.srcObject     = oCurrentVideoCam;
-            videoCamElem.style.display = "block";
 
         /* use the stream */
         } catch(err) {
@@ -126,7 +125,6 @@
                 );
             }
     
-        videoCamElem.style.display = "none";
         videoCamElem.srcObject     = null;
         videoCamElem.src           = "";
     }
