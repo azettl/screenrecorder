@@ -39,6 +39,7 @@
         "click", 
         (event) => {
             if(userCamElem.checked){
+                videoCamElem.style.display = "block";
                 getUserVideoAudioMedia();
             }else{
                 videoCamElem.style.display = "none";
