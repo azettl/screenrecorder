@@ -196,11 +196,19 @@
 
                     // Add the webcam stream. Position it on the bottom left and resize it to 100x100.
                     merger.addStream(oCurrentVideoCam, {
-                        x: merger.width - ((videoElem.videoWidth / 100) * 30),
-                        y: merger.height - ((videoElem.videoHeight / 100) * 30),
-                        width: (videoElem.videoWidth / 100) * 30,
-                        height: (videoElem.videoHeight / 100) * 30,
-                        mute: false
+                        draw: (ctx, frame, done) => {
+                            var x = merger.width - ((videoElem.videoWidth / 100) * 30);
+                            var y = merger.height - ((videoElem.videoHeight / 100) * 30);
+
+                            var width  = (videoElem.videoWidth / 100) * 30;
+                            var height = (videoElem.videoHeight / 100) * 30;
+                            // You can do whatever you want with this canvas context
+                            ctx.drawImage(frame, x, y, width, height);
+
+                            console.log(frame);
+
+                            done();
+                        }
                     })
 
                     // Start the merging. Calling this makes the result available to us
