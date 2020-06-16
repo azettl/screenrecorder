@@ -96,15 +96,6 @@
                     }
                 }
             );
-            oCurrentVideoCamObjectURL = window.URL.createObjectURL(
-                new Blob(
-                    oCurrentVideoCam, 
-                    {
-                        type: 'video/webm'
-                    }
-                )
-            );
-            videoCamElem.src = oCurrentVideoCamObjectURL;
             videoCamElem.srcObject = oCurrentVideoCam;
 
         /* use the stream */
