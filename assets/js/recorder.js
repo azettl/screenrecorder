@@ -195,11 +195,12 @@
                     })
 
                     // Add the webcam stream. Position it on the bottom left and resize it to 100x100.
+                    var iBoxSize = (videoElem.videoHeight / 100) * 15;
                     merger.addStream(oCurrentVideoCam, {
                         x: 0,
-                        y: merger.height - 100,
-                        width: 100,
-                        height: 100,
+                        y: merger.height - iBoxSize,
+                        width: iBoxSize,
+                        height: iBoxSize,
                         mute: false
                     })
 
