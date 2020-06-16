@@ -203,16 +203,16 @@
                             var width  = (videoElem.videoWidth / 100) * 30;
                             var height = (videoElem.videoHeight / 100) * 30;
                             // You can do whatever you want with this canvas context
-                            //ctx.drawImage(frame, x, y, width, height);
-
+                            ctx.drawImage(frame, x, y, width, height);
+/*
                            
                                 ctx.beginPath();
     ctx.arc(200, 200, width, 0, 6.2, false); //draw the circle
     ctx.clip(); //call the clip method so the next render is clipped in last path
     ctx.stroke();
     ctx.closePath();
-    ctx.drawImage(frame, -Math.abs(width / 2), -Math.abs(height / 2)); 
-                            
+    ctx.drawImage(video, -Math.abs(width / 2), -Math.abs(height / 2)); 
+                            */
                             //console.log(frame);
 
                             done();
