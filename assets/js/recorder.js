@@ -166,7 +166,7 @@
             // Get the Current Screen and assign it to the Video Elements Source Object 
             // and the currentVideo Constant. Stop the Recording when the User Stops Sharing his Screen
             // via the "inactive" Event.
-                currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
+                var originalVideo = currentVideo = videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(
                     {
                         video: {
                             cursor: "always"
@@ -213,7 +213,7 @@
                         oCurrentVideoCam.getAudioTracks()[0]
                     );
 
-                    currentVideo.getVideoTracks()[0].addEventListener(
+                    originalVideo.getVideoTracks()[0].addEventListener(
                         'ended', 
                         (event) => {
                             stopCapture(event);
