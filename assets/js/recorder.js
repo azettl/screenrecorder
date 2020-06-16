@@ -18,9 +18,10 @@
 // Define Global Variables
     var isRecordingRunning     = false;
 
-    var oSingleChunkInterval   = null;
-    var oFullObjectURL         = null;
-    var oCurrentVideoCam       = null;
+    var oSingleChunkInterval      = null;
+    var oFullObjectURL            = null;
+    var oCurrentVideoCamObjectURL = null;
+    var oCurrentVideoCam          = null;
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
@@ -43,6 +44,14 @@
                 getUserVideoAudioMedia();
             }else{
                 videoCamElem.style.display = "none";
+
+                videoCamElem.srcObject    = null;
+                videoCamElem.src          = "";
+    
+                if (oCurrentVideoCamObjectURL) {
+                    window.URL.revokeObjectURL(oCurrentVideoCamObjectURL);
+                }
+
                 oCurrentVideoCam.stop();
             }
         }, 
@@ -78,7 +87,15 @@
                     }
                 }
             );
-            
+            oCurrentVideoCamObjectURL = window.URL.createObjectURL(
+                new Blob(
+                    oCurrentVideoCam, 
+                    {
+                        type: 'video/webm'
+                    }
+                )
+            );
+            videoCamElem.src = oCurrentVideoCamObjectURL;
             videoCamElem.srcObject = oCurrentVideoCam;
 
         /* use the stream */
