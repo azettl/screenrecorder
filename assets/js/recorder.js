@@ -43,6 +43,7 @@
                 getUserVideoAudioMedia();
             }else{
                 videoCamElem.style.display = "none";
+                oCurrentVideoCam.stop();
             }
         }, 
         false
@@ -54,7 +55,7 @@
         (event) => {
             if(isRecordingRunning){
                 stopCapture();
-                
+
                 // Track Screen Recording with Fathom 
                     window.fathom.trackGoal('9VXPTH8L', 0);
             }else{
