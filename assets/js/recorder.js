@@ -206,16 +206,6 @@
                             ctx.fillStyle = "#6ac2b6";
                             ctx.fillRect(x -5, y - 5, width + 5, height + 5);
                             ctx.drawImage(frame, x, y, width, height);
-/*
-                           
-                                ctx.beginPath();
-    ctx.arc(200, 200, width, 0, 6.2, false); //draw the circle
-    ctx.clip(); //call the clip method so the next render is clipped in last path
-    ctx.stroke();
-    ctx.closePath();
-    ctx.drawImage(video, -Math.abs(width / 2), -Math.abs(height / 2)); 
-                            */
-                            //console.log(frame);
 
                             done();
                         },
