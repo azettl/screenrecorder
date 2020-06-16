@@ -13,7 +13,8 @@
     const gifDowElem  = document.getElementById("resultLinkGIF");
     const chunkLeElem = document.getElementById("singleChunkLengthInSec");
     const errorMsElem = document.getElementById("errorMsg");
-    const userCamElem = document.getElementById("addUserVideoAudio");
+    const userAudioElem = document.getElementById("addUserAudio");
+    const userVideoElem = document.getElementById("addUserVideo");
 
 // Define Global Variables
     var isRecordingRunning     = false;
@@ -36,28 +37,25 @@
     );
 
 // Attach Event Listener to ask for permissions for user audio and video on click of the checkbox
-    userCamElem.addEventListener(
+    userVideoElem.addEventListener(
         "click", 
         (event) => {
-            if(userCamElem.checked){
+            if(userVideoElem.checked){
                 getUserVideoAudioMedia();
             }else{
-                if (oCurrentVideoCamObjectURL) {
-                    window.URL.revokeObjectURL(oCurrentVideoCamObjectURL);
-                }
+                stopUserVideoAudioMedia();
+            }
+        }, 
+        false
+    );
 
-                // Stop all the Tracks on the Video Elements Source Object
-                    if(videoCamElem.srcObject){
-                        let tracks = videoCamElem.srcObject.getTracks();
-                        tracks.forEach(
-                            function(track){
-                                track.stop();
-                            }
-                        );
-                    }
-            
-                videoCamElem.srcObject    = null;
-                videoCamElem.src          = "";
+    userAudioElem.addEventListener(
+        "click", 
+        (event) => {
+            if(userAudioElem.checked){
+                getUserVideoAudioMedia();
+            }else{
+                stopUserVideoAudioMedia();
             }
         }, 
         false
@@ -85,11 +83,12 @@
         try {
             oCurrentVideoCam = await navigator.mediaDevices.getUserMedia(
                 {
-                    audio: true,
-                    video: false
+                    audio: (userAudioElem.checked ? true : false),
+                    video: (userVideoElem.checked ? true : false)
                 }
             );
-            videoCamElem.srcObject = oCurrentVideoCam;
+            videoCamElem.srcObject     = oCurrentVideoCam;
+            videoCamElem.style.display = "block";
 
         /* use the stream */
         } catch(err) {
@@ -108,6 +107,27 @@
                     break;
             }
         }
+    }
+
+// Definition to stop user audio and video 
+    function stopUserVideoAudioMedia(){
+        if (oCurrentVideoCamObjectURL) {
+            window.URL.revokeObjectURL(oCurrentVideoCamObjectURL);
+        }
+
+        // Stop all the Tracks on the Video Elements Source Object
+            if(videoCamElem.srcObject){
+                let tracks = videoCamElem.srcObject.getTracks();
+                tracks.forEach(
+                    function(track){
+                        track.stop();
+                    }
+                );
+            }
+    
+        videoCamElem.style.display = "none";
+        videoCamElem.srcObject     = null;
+        videoCamElem.src           = "";
     }
 
 // Definition of the async startCapture function
@@ -153,12 +173,12 @@
                             cursor: "always"
                         },
                         audio: {
-                           volume: (userCamElem.checked ? 0.5 : 1) 
+                           volume: (userAudioElem.checked ? 0.5 : 1) 
                         }
                     }
                 );
 
-                if(userCamElem.checked){
+                if(userAudioElem.checked){
                     currentVideo.addTrack(
                         oCurrentVideoCam.getAudioTracks()[0]
                     );
@@ -172,6 +192,34 @@
                                 window.fathom.trackGoal('9VXPTH8L', 0);
                         }
                     );
+                }
+
+                if(userVideoElem.checked){
+
+                    var merger = new VideoStreamMerger();
+
+                    // Add the screen capture. Position it to fill the whole stream (the default)
+                    merger.addStream(currentVideo, {
+                        x: 0, // position of the topleft corner
+                        y: 0,
+                        width: merger.width,
+                        height: merger.height,
+                        mute: true // we don't want sound from the screen (if there is any)
+                    })
+
+                    // Add the webcam stream. Position it on the bottom left and resize it to 100x100.
+                    merger.addStream(oCurrentVideoCam, {
+                        x: 0,
+                        y: merger.height - 100,
+                        width: 100,
+                        height: 100,
+                        mute: false
+                    })
+
+                    // Start the merging. Calling this makes the result available to us
+                    merger.start();
+
+                    videoElem.srcObject = merger.result;
                 }
 
                 currentVideo.addEventListener(
@@ -344,8 +392,8 @@
             isRecordingRunning = false;
 
         // Stop User Video and Audio Recording
-            if(userCamElem.checked){
-                userCamElem.click();
+            if(userAudioElem.checked){
+                userAudioElem.click();
             }
 
         // Set Button Label to Start Capture

@@ -46,9 +46,15 @@
                     </button>
                     <span id="errorMsg"></span>
                     <span class="checkbox">
-                        <input type="checkbox" id="addUserVideoAudio">
-                        <label for="addUserVideoAudio">
+                        <input type="checkbox" id="addUserAudio">
+                        <label for="addUserAudio">
                             Add Microphone Recording
+                        </label>
+                    </span>
+                    <span class="checkbox">
+                        <input type="checkbox" id="addUserVideo">
+                        <label for="addUserVideo">
+                            Add Webcam Recording
                         </label>
                     </span>
                     <label for="singleChunkLengthInSec">Single Chunk Length in Seconds</label>
@@ -151,6 +157,7 @@
         <script src="/assets/js/gif.js"></script>
         <script src="/assets/js/gif.worker.js"></script>
         <script src="/assets/js/gif.converter.js"></script>
+        <script src="/assets/js/video-stream-merger.js"></script>
         <script src="/assets/js/recorder.js"></script>
         <!-- Fathom - beautiful, simple website analytics -->
             <script src="https://porpoise.azettl.net/script.js" site="KWJDZQGY" defer></script>
