@@ -177,22 +177,6 @@
                     }
                 );
 
-                if(userAudioElem.checked){
-                    currentVideo.addTrack(
-                        oCurrentVideoCam.getAudioTracks()[0]
-                    );
-
-                    currentVideo.getVideoTracks()[0].addEventListener(
-                        'ended', 
-                        (event) => {
-                            stopCapture(event);
-                            
-                            // Track Screen Recording with Fathom 
-                                window.fathom.trackGoal('9VXPTH8L', 0);
-                        }
-                    );
-                }
-
                 if(userVideoElem.checked){
 
                     var merger = new VideoStreamMerger();
@@ -218,7 +202,23 @@
                     // Start the merging. Calling this makes the result available to us
                     merger.start();
 
-                    videoElem.srcObject = merger.result;
+                    currentVideo = videoElem.srcObject = merger.result;
+                }
+
+                if(userAudioElem.checked){
+                    currentVideo.addTrack(
+                        oCurrentVideoCam.getAudioTracks()[0]
+                    );
+
+                    currentVideo.getVideoTracks()[0].addEventListener(
+                        'ended', 
+                        (event) => {
+                            stopCapture(event);
+                            
+                            // Track Screen Recording with Fathom 
+                                window.fathom.trackGoal('9VXPTH8L', 0);
+                        }
+                    );
                 }
 
                 currentVideo.addEventListener(
