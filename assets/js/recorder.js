@@ -407,7 +407,6 @@
     function stopCapture(evt) {
         // Set the isRecordingRunning Variable to FALSE cause the stopped the Recording
             isRecordingRunning = false;
-            oVideoMerger.destroy();
 
         // Stop User Video and Audio Recording
             if(userAudioElem.checked){
