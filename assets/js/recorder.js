@@ -509,10 +509,11 @@
 
         // Remove the Old Source Object from the Video Element and Assign the new Object URL
         // then Play the Video
+            oVideoMerger.destroy();
+            
             videoElem.srcObject = null;
             videoElem.src       = oFullObjectURL;
             
-            oVideoMerger.destroy();
 
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
         // chunk and WebM download link. The timeout is to get the last chunk into the array before this
