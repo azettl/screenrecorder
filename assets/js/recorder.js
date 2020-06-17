@@ -24,6 +24,7 @@
     var oCurrentVideoCamObjectURL = null;
     var oCurrentVideoCam          = null;
     var currentVideo              = null;
+    var oVideoMerger              = null;
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
@@ -178,7 +179,7 @@
                 if(userVideoElem.checked){
 
                     await new Promise(resolve => videoElem.onloadedmetadata = resolve);
-                    var merger = new VideoStreamMerger(
+                    oVideoMerger = new VideoStreamMerger(
                         {
                             width: videoElem.videoWidth,   // Width of the output video
                             height: videoElem.videoHeight,  // Height of the output video
@@ -186,28 +187,28 @@
                     );
 
                     // Add the screen capture. Position it to fill the whole stream (the default)
-                    merger.addStream(currentVideo, {
+                    oVideoMerger.addStream(currentVideo, {
                         x: 0, // position of the topleft corner
                         y: 0,
-                        width: merger.width,
-                        height: merger.height,
+                        width: oVideoMerger.width,
+                        height: oVideoMerger.height,
                         mute: true // we don't want sound from the screen (if there is any)
                     })
 
                     // Add the webcam stream. Position it on the bottom left and resize it to 100x100.
-                    merger.addStream(oCurrentVideoCam, {
+                    oVideoMerger.addStream(oCurrentVideoCam, {
                         draw: (ctx, frame, done) => {
-                            var x = merger.width - ((videoElem.videoWidth / 100) * 20) - 40;
-                            var y = merger.height - ((videoElem.videoHeight / 100) * 20) - 40;
+                            var x = oVideoMerger.width - ((videoElem.videoWidth / 100) * 20) - 40;
+                            var y = oVideoMerger.height - ((videoElem.videoHeight / 100) * 20) - 40;
 
                             var width  = (videoElem.videoWidth / 100) * 20;
                             var height = (videoElem.videoHeight / 100) * 20;
                             
                             ctx.shadowOffsetX = 0;
                             ctx.shadowOffsetY = 0;
-                            ctx.shadowBlur = 20;
-                            ctx.shadowColor = '#6ac2b6';
-                            ctx.fillStyle = "#6ac2b6";
+                            ctx.shadowBlur    = 20;
+                            ctx.shadowColor   = '#6ac2b6';
+                            ctx.fillStyle     = "#6ac2b6";
                             ctx.fillRect(x -5, y - 5, width + 10, height + 10);
                             ctx.drawImage(frame, x, y, width, height);
 
@@ -217,9 +218,9 @@
                     })
 
                     // Start the merging. Calling this makes the result available to us
-                    merger.start();
+                    oVideoMerger.start();
 
-                    currentVideo = videoElem.srcObject = merger.result;
+                    currentVideo = videoElem.srcObject = oVideoMerger.result;
                 }
 
                 if(userAudioElem.checked){
@@ -510,6 +511,8 @@
         // then Play the Video
             videoElem.srcObject = null;
             videoElem.src       = oFullObjectURL;
+            
+            oVideoMerger.destroy();
 
         // Loop through aSingleChunkRecordings and create a div including a header, video of the single
         // chunk and WebM download link. The timeout is to get the last chunk into the array before this
