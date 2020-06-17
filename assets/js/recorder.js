@@ -407,6 +407,7 @@
     function stopCapture(evt) {
         // Set the isRecordingRunning Variable to FALSE cause the stopped the Recording
             isRecordingRunning = false;
+            oVideoMerger.destroy();
 
         // Stop User Video and Audio Recording
             if(userAudioElem.checked){
@@ -509,8 +510,7 @@
 
         // Remove the Old Source Object from the Video Element and Assign the new Object URL
         // then Play the Video
-            oVideoMerger.destroy();
-            
+
             videoElem.srcObject = null;
             videoElem.src       = oFullObjectURL;
             
