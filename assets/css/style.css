@@ -105,7 +105,8 @@
     #resultLinkWebM,
     #resultLinkGIF,
     #errorMsg,
-    #videoCam{
+    #videoCam,
+    #subtitlesCheckbox{
         display: none;
     }
 /* END:: Chunks */
