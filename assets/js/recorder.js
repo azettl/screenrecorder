@@ -57,9 +57,9 @@
 
                 recognitionForSubtitles.onerror = function(event) {
                     if (event.error == 'no-speech') {
-                        /*ignoreRecognitionOnEnd = true;
+                        ignoreRecognitionOnEnd = true;
                         errorMsElem.innerHTML = "&#128165; No speech was detected.";
-                        errorMsElem.style.display = "block";*/
+                        errorMsElem.style.display = "block";
                     }
                     if (event.error == 'audio-capture') {
                         ignoreRecognitionOnEnd = true;
