@@ -103,6 +103,13 @@
                    ].forEach(function(eventName) {
                         recognitionForSubtitles[eventName] = function(e) {
                             console.log(eventName, e);
+                            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                                if (event.results[i].isFinal) {
+                                    console.log('Final' + event.results[i][0].transcript);
+                                } else {
+                                    console.log('interim' + event.results[i][0].transcript);
+                                }
+                            }
                         };
                    });
             }else{
