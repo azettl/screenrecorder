@@ -101,8 +101,8 @@
                     'onspeechend',
                     'onstart'
                    ].forEach(function(eventName) {
-                        recognitionForSubtitles[eventName] = function(e) {
-                            console.log(eventName, e);
+                        recognitionForSubtitles[eventName] = function(event) {
+                            console.log(eventName, event);
                             for (var i = event.resultIndex; i < event.results.length; ++i) {
                                 if (event.results[i].isFinal) {
                                     console.log('Final' + event.results[i][0].transcript);
