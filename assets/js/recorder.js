@@ -47,7 +47,7 @@
         "click", 
         (event) => {
             if(addSubtitlesElem.checked){
-                recognitionForSubtitles                = new SpeechRecognition();
+                recognitionForSubtitles                = new webkitSpeechRecognition();
                 recognitionForSubtitles.continuous     = true;
                 recognitionForSubtitles.interimResults = true;
 
