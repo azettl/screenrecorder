@@ -91,6 +91,20 @@
                         }
                     }
                 };
+
+                [
+                    'onaudiostart',
+                    'onaudioend',
+                    'onnomatch',
+                    'onsoundstart',
+                    'onsoundend',
+                    'onspeechend',
+                    'onstart'
+                   ].forEach(function(eventName) {
+                        recognitionForSubtitles[eventName] = function(e) {
+                            console.log(eventName, e);
+                        };
+                   });
             }else{
                 if(recognizingForSubtitles) {
                     recognitionForSubtitles.stop();
