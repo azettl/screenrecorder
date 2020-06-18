@@ -15,6 +15,7 @@
     const errorMsElem = document.getElementById("errorMsg");
     const userAudioElem = document.getElementById("addUserAudio");
     const userVideoElem = document.getElementById("addUserVideo");
+    const addSubtitlesElem = document.getElementById("addSubtitles");
 
 // Define Global Variables
     var isRecordingRunning     = false;
@@ -25,6 +26,9 @@
     var oCurrentVideoCam          = null;
     var currentVideo              = null;
     var oVideoMerger              = null;
+    var recognitionForSubtitles   = null;
+    var recognizingForSubtitles   = false;
+    var ignoreRecognitionOnEnd    = false;
 
     var aSingleChunkRecordings = [];
     var aFullChunkRecordings   = [];
@@ -36,6 +40,64 @@
         (event) => {
             loaderElem.style.display = "none";
         }
+    );
+
+// Add speech recognition if checkbox "addSubtitlesElem" is checked
+    addSubtitlesElem.addEventListener(
+        "click", 
+        (event) => {
+            if(addSubtitlesElem.checked){
+                recognitionForSubtitles                = new webkitSpeechRecognition();
+                recognitionForSubtitles.continuous     = true;
+                recognitionForSubtitles.interimResults = true;
+
+                recognitionForSubtitles.onstart = function() {
+                    recognizingForSubtitles = true;
+                };
+
+                recognitionForSubtitles.onerror = function(event) {
+                    if (event.error == 'no-speech') {
+                        ignoreRecognitionOnEnd = true;
+                        errorMsElem.innerHTML = "&#128165; No speech was detected.";
+                        errorMsElem.style.display = "block";
+                    }
+                    if (event.error == 'audio-capture') {
+                        ignoreRecognitionOnEnd = true;
+                        errorMsElem.innerHTML = "&#128165; No microphone was found.";
+                        errorMsElem.style.display = "block";
+                    }
+                    if (event.error == 'not-allowed') {
+                        ignoreRecognitionOnEnd = true;
+                        errorMsElem.innerHTML = "&#128165; Permission to use microphone was denied or blocked.";
+                        errorMsElem.style.display = "block";
+                    }
+                };
+
+                recognitionForSubtitles.onend = function() {
+                    recognizingForSubtitles = false;
+                    if (ignoreRecognitionOnEnd) {
+                        return;
+                    }
+                };
+
+                recognitionForSubtitles.onresult = function(event) {
+                    for (var i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            console.log('Final' + event.results[i][0].transcript);
+                        } else {
+                            console.log('interim' + event.results[i][0].transcript);
+                        }
+                    }
+                };
+            }else{
+                if(recognizingForSubtitles) {
+                    recognitionForSubtitles.stop();
+                    recognitionForSubtitles = null;
+                    return;
+                }
+            }
+        }, 
+        false
     );
 
 // Attach Event Listener to ask for permissions for user audio and video on click of the checkbox
@@ -249,6 +311,19 @@
                     }
                 );
 
+            // Add speech recognition if checkbox "addSubtitlesElem" is checked
+                if(addSubtitlesElem.checked){
+                    if(recognizingForSubtitles) {
+                        recognitionForSubtitles.stop();
+                    }
+                    
+                    recognitionForSubtitles.lang = "en-US";
+                    recognitionForSubtitles.start();
+                    ignoreRecognitionOnEnd = false;
+                }
+
+            
+
             // Define the MediaRecorder for the Full Video Recording and Push the Data to the 
             // aFullChunkRecordings Array whenever Data is Available.
                 const mediaRecorder = new MediaRecorder(
@@ -414,6 +489,14 @@
             }
             if(userVideoElem.checked){
                 userVideoElem.click();
+            }
+
+        // Stop speech recognition if checkbox "addSubtitlesElem" is checked
+            if(addSubtitlesElem.checked){
+                if(recognizingForSubtitles) {
+                    recognitionForSubtitles.stop();
+                    recognitionForSubtitles = null;
+                }
             }
 
         // Set Button Label to Start Capture
