@@ -81,6 +81,7 @@
                 };
 
                 recognitionForSubtitles.onresult = function(event) {
+                    console.log(event);
                     for (var i = event.resultIndex; i < event.results.length; ++i) {
                         if (event.results[i].isFinal) {
                             console.log('Final' + event.results[i][0].transcript);
@@ -92,7 +93,6 @@
             }else{
                 if(recognizingForSubtitles) {
                     recognitionForSubtitles.stop();
-                    recognitionForSubtitles = null;
                     return;
                 }
             }
@@ -495,7 +495,6 @@
             if(addSubtitlesElem.checked){
                 if(recognizingForSubtitles) {
                     recognitionForSubtitles.stop();
-                    recognitionForSubtitles = null;
                 }
             }
 
