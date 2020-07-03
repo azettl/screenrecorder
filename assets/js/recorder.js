@@ -39,6 +39,12 @@
         "DOMContentLoaded", 
         (event) => {
             loaderElem.style.display = "none";
+
+            if(navigator.userAgent.indexOf("Edg/") !== -1){
+                document.getElementById("getforedge").style.display = "block";
+            }else if(navigator.userAgent.indexOf("Chrome") !== -1){
+                document.getElementById("getforchrome").style.display = "block";
+            }
         }
     );
 

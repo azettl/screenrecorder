@@ -79,6 +79,11 @@
     a:active{
         text-decoration: underline var(--button-color-active);
     }
+
+    #getforedge,
+    #getforchrome{
+        display: none;
+    }
 /* END:: General */
 
 /* START:: Video Elements */
